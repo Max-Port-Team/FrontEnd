@@ -1,2 +1,3 @@
 # FrontEnd
-![图片](https://user-images.githubusercontent.com/93420481/180898721-0370e072-4f23-4061-a634-fd3765a330b7.png)
+1.每一兄弟个先把这个文件夹clone一份到本地库，在本地库进行版本控制，确认无误后新建一个分支名字就叫你负责的组件名，千万不要直接提交到master哟。
+2.
