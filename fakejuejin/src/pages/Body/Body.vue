@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <div class="BodyContainer">
       <Article></Article>
@@ -22,4 +23,18 @@ export default {
         height: 1000px;
         border: 1px solid black;
     }
+=======
+<template>
+  
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+>>>>>>> 72b0f3257d36daefbab10ee0e51f9a15df152d5a
 </style>
