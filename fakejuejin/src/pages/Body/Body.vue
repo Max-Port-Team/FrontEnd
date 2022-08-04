@@ -7,7 +7,7 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="node in ArticleList" :key="node.id" :one=node></Article>
+    <Article v-for="node in ArticleList" :key="node.id" :one="node"></Article>
   </div>
 </template>
 
@@ -19,8 +19,46 @@ export default {
   data() {
     return {
       ArticleList: [],
+      scrollHeight:0,
+      pageYOffset:0
     };
   },
+  methods:{
+    finiteScroll(){
+      let {scrollHeight,pageYOffset}=this;
+      //  console.log(scrollHeight-pageYOffset,this.clientHeight+100)
+      if(scrollHeight-pageYOffset<this.clientHeight+800){
+          fetch("http://localhost:8080/api/MaxPort/article/queryAllArticle").then((res)=>{
+           return res.json()
+          },(err)=>{console.log(err)}).then((res)=>{
+            this.ArticleList=[...this.ArticleList,...res]
+          },(err)=>{console.log(err)})
+      }
+    },
+    antishake(fnc,dalay){
+        let timer=null
+        return ()=>{
+          clearTimeout(timer)
+          timer=setTimeout(fnc,dalay)
+        }
+    },
+    throttle(fnc,time){
+        let flag=true
+        return ()=>{
+          if(flag){
+            flag=false
+            fnc()
+            setTimeout(()=>{flag=true},time)
+          }
+        }
+    }
+   },
+  computed:{
+    clientHeight(){
+      return document.documentElement.clientHeight
+    }
+  }
+  ,
   mounted() {
     fetch("http://localhost:8080/api/MaxPort/article/queryAllArticle")
       .then((res) => {
@@ -28,15 +66,28 @@ export default {
       })
       .then((res) => {
         this.ArticleList = res;
-        this.$refs.FakeArticle.style.display='none'
+        this.$refs.FakeArticle.style.display = "none";
       });
+   let throttleFiniteScroll=this.throttle(this.finiteScroll,1000)
+   document.addEventListener("scroll", () => {
+      this.scrollHeight = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight,
+        document.body.clientHeight,
+        document.documentElement.clientHeight
+      );
+      this.pageYOffset=window.pageYOffset;
+      throttleFiniteScroll()
+    });
   },
 };
 </script>
 
 <style scoped>
-[v-cloak]{
-    background-color: red!important;;
+[v-cloak] {
+  background-color: red !important;
 }
 @keyframes fakeload {
   0% {
@@ -52,7 +103,7 @@ export default {
       rgb(230, 230, 230),
       rgb(230, 230, 230),
       rgb(230, 230, 230),
-      white,
+      white
     );
   }
   10% {
@@ -212,13 +263,13 @@ export default {
       rgb(230, 230, 230),
       rgb(230, 230, 230),
       rgb(230, 230, 230),
-     white
+      white
     );
   }
 }
 .BodyContainer {
   display: inline-block;
-  width: 600px;
+  width: 700px;
   height: auto;
   background-color: white;
 }
@@ -228,7 +279,7 @@ export default {
   border: 1px solid rgb(180, 49, 49);
 }
 .FakeArticle div {
-  animation: fakeload 1s ease infinite ;
+  animation: fakeload 1s ease infinite;
   height: 15px;
   background: rgb(230, 230, 230);
   border-radius: 5px;

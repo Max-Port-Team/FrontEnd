@@ -16,8 +16,7 @@ export default {
         width: 250px;
         height: 500px;
         border: 1px solid black;
-        left: 70%;
+        left: 80%;
         top: 0;
-
     }
 </style>

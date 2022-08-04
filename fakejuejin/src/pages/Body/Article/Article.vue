@@ -5,12 +5,13 @@
       ><span>{{ one.tag }}</span>
     </header>
     <h3 class="article-title">{{ one.title }}</h3>
-    <h5 class="article-fake-body">{{ one.intro.slice(0, 40) + "..." }}</h5>
+    <h5 class="article-fake-body">{{strSplit()}}</h5>
     <footer class="article-footer">
         <span>{{Math.round(Math.random()*300)}}</span>
         <span>{{Math.round(Math.random()*200)}}</span>
         <span>{{Math.round(Math.random()*100)}}</span>
     </footer>
+    <img :src='srcrandom' class="article-img" v-if="appear">
   </div>
 </template>
 
@@ -19,16 +20,32 @@ import time from "time.js";
 export default {
   name: "Article",
   state() {
-    return {};
+    return {
+    };
   },
   props: ["one"],
+  methods:{
+    strSplit(){
+      if(this.appear){
+        return this.one.intro.slice(0,30) + "..."
+      }
+      else{
+        return this.one.intro.slice(0,45) + "..."
+      }
+    }
+  },
   computed: {
     timeage() {
       return time.ago(this.one.time);
     },
+    srcrandom(){
+      return require('../../../assets/'+Math.round(Math.random()*10)+'.jpg');
+    },
+    appear(){
+      return Math.random()>0.6?true:false
+    }
   },
   mounted() {
-    
   },
 };
 </script>
@@ -39,7 +56,7 @@ export default {
   padding-top: 20px;
   margin: 0 auto;
   width: 90%;
-  height: 145px;
+  height: 140px;
   border-bottom: 1px solid rgb(165, 164, 164);
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial
 }
@@ -118,5 +135,13 @@ export default {
     width: 15px;
     background-size: 100% 100%; 
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKRSURBVHgB7VZNbtpQEJ55BlR15RvUOUHTG5ATJD1BQ9NU6gq8JKiKoyrJ0u2qUmkFOUGaE5TegJwg7gnqLRh7MvMwwiDbYHCUDZ9kHph5M9+bN38AO+zwzEAoiEv3xz4v/KAFiK/0S6J/qPCBoui+Y38cFlC3HgHH7Zk1FTXZUIt/mivEPVY6GFFw4difPNiWwNW3X+dLhj1iA3JqProXq7EQ8TVoz4A1147OWfPkAjYhcO1+twirt7FSEexPiG4+26cDyMEXt1s3AI7Z+LsZ4TEFB1newBzjf2B6Gi8kaqwyvEpHFgmVtjmxcTgm401R44I2G0M2KjpEV5W9KbG0koC+8znrt47d8GFDCAk+gJCQwNyvwqS1LLNwBbHbHuQ7G99bJ4rXgY4LRPGqz4T2koda8EAERl2zIrory7hArlBnDmdSDSbHyf8WrwDVNHKV0YOyQdGNXhAPMwlgnHKjaHQPJUNBOEjamL9fhI7SMt0/Q3uu08wjoJGWLk+FZQKefLyEwIKSETcxwTCbANFfWQLAIygZCFifrjkEQq73WgixCaUziHWi+p1JIC65Hj/mpdt1oCQkq2u7+f4uk4BAGo8minguFQy2hFRXvlonqTuXgK5aRLqHc/m8vXK7LdgCE6hYskolTGtqqWnYsU+dmITJrnCvv/7sOXKSDVCBiScrJgeVBHInIokDuYqEsB5KQqgMl7uk1A4DwrpCkFLLExL0x1HAWfXCr2H4X2TOWh+wEAGB7pBQcRITzgwymvmxEilcVtp+cX1cfs20Drv2VKyDSVUPI4Ij3lRPEfFJclzXEvIQlXhioZ4QYaNjn/Q3IrAMiQmDA0wB+QGEflr/ENK6xXOXFS8QRQdFx/YdnhyP1D0hcwr1KvEAAAAASUVORK5CYII=);
+}
+.article-img{
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  right: 10px;
+  bottom: 20px;
+  border-radius: 5px;
 }
 </style>
