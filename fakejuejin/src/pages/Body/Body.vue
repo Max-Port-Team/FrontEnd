@@ -7,7 +7,7 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="node in ArticleList" :key="node.id"></Article>
+    <Article v-for="node in ArticleList" :key="node.id" :one=node></Article>
   </div>
 </template>
 
@@ -220,7 +220,7 @@ export default {
   display: inline-block;
   width: 600px;
   height: auto;
-  border: 1px solid black;
+  background-color: white;
 }
 .FakeArticle {
   width: 100%;
