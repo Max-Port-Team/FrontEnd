@@ -43,6 +43,9 @@ export default {
    .SiderBarContainer{
      display: none;
    }
+   .AppFooter{
+     display: none;
+   }
    .BodyContainer{
      width: 100%!important;
    }
