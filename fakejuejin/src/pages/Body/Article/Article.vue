@@ -1,5 +1,5 @@
 <template>
-  <div class="ArticleContainer">
+  <div class="ArticleContainer" @click="Articledetail">
     <header class="article-header">
       <span>奔跑的lili</span><span>{{ timeage }}</span
       ><span>{{ one.tag }}</span>
@@ -32,6 +32,10 @@ export default {
       else{
         return this.one.intro.slice(0,45) + "..."
       }
+    },
+    Articledetail(){
+      let routeData = this.$router.resolve({name: "articledetail",query:{one:this.one}}); 
+      window.open(routeData.href, '_blank');
     }
   },
   computed: {
@@ -44,9 +48,7 @@ export default {
     appear(){
       return Math.random()>0.6?true:false
     }
-  },
-  mounted() {
-  },
+  }
 };
 </script>
 
@@ -54,11 +56,15 @@ export default {
 .ArticleContainer {
   position: relative;
   padding-top: 20px;
+  
   margin: 0 auto;
   width: 90%;
   height: 140px;
   border-bottom: 1px solid rgb(165, 164, 164);
   font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial
+}
+.ArticleContainer:hover{
+  background-color: rgb(243, 243, 243);
 }
 .article-header {
   height: 20px;

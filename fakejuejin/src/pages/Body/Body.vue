@@ -269,6 +269,7 @@ export default {
 }
 .BodyContainer {
   display: inline-block;
+  cursor: pointer;
   width: 700px;
   height: auto;
   background-color: white;
