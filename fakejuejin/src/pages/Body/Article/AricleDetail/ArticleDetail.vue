@@ -11,10 +11,14 @@ import ArticleMain from './components/ArticleMain.vue'
 // import Catalog from './components/Catalog.vue'
 // import Relativity from './components/Relativity.vue'
 export default {
+    data(){
+        return{
+            body:''
+        }
+    },
     components:{ArticleMain,Tool},
-    props:['body'],
     mounted(){
-       console.log(this.$route.query.one)
+       this.body=this.$route.query.body
     }
 }
 </script>

@@ -34,7 +34,7 @@ export default {
       }
     },
     Articledetail(){
-      let routeData = this.$router.resolve({name: "articledetail",query:{one:this.one}}); 
+      let routeData = this.$router.resolve({name: "articledetail",query:{body:this.one.body}}); 
       window.open(routeData.href, '_blank');
     }
   },
@@ -61,7 +61,6 @@ export default {
   width: 90%;
   height: 140px;
   border-bottom: 1px solid rgb(165, 164, 164);
-  font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial
 }
 .ArticleContainer:hover{
   background-color: rgb(243, 243, 243);

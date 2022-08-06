@@ -2,7 +2,7 @@
     <div >
         <main class="ArticleMain">
             <ArticleHead/>
-             <ArticleBody :body='body'/>
+             <ArticleBody  :body='body'/>
         </main>   
     </div>
 
@@ -14,14 +14,21 @@ import ArticleBody from "./ArticleBody.vue";
 export default {
   name: "ArticleMain",
   props:['body'],
-  components:{ArticleHead,ArticleBody}
+  components:{ArticleHead,ArticleBody},
+  mounted(){
+      console.log(this.$refs)
+    }
 };
 </script>
 
 <style>
     .ArticleMain{
-        width: 700px;
-        height: 1000px;
-        border: 1px solid red;
+        width: 900px;
+        height: auto;
+    }
+    .ArticleMain img{
+        display: block;
+        max-width: 90%;
+        margin: 0 auto;
     }
 </style>

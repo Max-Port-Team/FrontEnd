@@ -12,11 +12,9 @@ export default {
 
 <style scoped>
     .SiderBarContainer{
-        position: absolute;
         width: 250px;
         height: 500px;
         border: 1px solid black;
-        left: 80%;
         top: 0;
     }
 </style>

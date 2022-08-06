@@ -277,7 +277,6 @@ export default {
 .FakeArticle {
   width: 100%;
   height: 155px;
-  border: 1px solid rgb(180, 49, 49);
 }
 .FakeArticle div {
   animation: fakeload 1s ease infinite;
