@@ -8,25 +8,29 @@ import mmd from 'micromarkdown';
 export default {
     name:'ArticleBody',
     props:['body'],
+    data(){
+        return{
+        }
+    },
     computed:{
         parsebody(){
             return mmd.parse(this.body)
         }
     },
     mounted(){
-        new Promise((resolve,rejrct)=>{
-            setTimeout(()=>{this.$refs.ArticleBody.innerHTML=this.parsebody;resolve()}) 
-        }).then(()=>{this.$refs.ArticleBody.className='ArticleBody' })
+        const timer=setInterval(()=>{
+            if(this.body){this.$refs.ArticleBody.innerHTML=mmd.parse(this.body);clearInterval(timer)}
+        },100)
     }
 }
 </script>
 
 <style scoped>
     .ArticleBody{
-        width: 100%; 
+        width: 90%; 
+        padding: 5%;
+        text-indent: 10px;
         letter-spacing: 3px;
-        white-space: pre-line;
-        padding-left: 10px;
-        padding-right: 10px;
+        white-space:pre-line;
     }
 </style>

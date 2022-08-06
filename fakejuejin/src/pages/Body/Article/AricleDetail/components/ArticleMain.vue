@@ -13,10 +13,21 @@ import ArticleHead from "./ArticleHead.vue";
 import ArticleBody from "./ArticleBody.vue";
 export default {
   name: "ArticleMain",
-  props:['body'],
+  data(){
+      return{
+          body:'',
+          othser:{}
+      }
+  },
+  props:['id'],
   components:{ArticleHead,ArticleBody},
   mounted(){
-      console.log(this.$refs)
+        fetch(`http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`)
+        .then(res=>res.json())
+        .then(res=>{
+            this.others=res;
+            this.body=res.body
+        })         
     }
 };
 </script>
