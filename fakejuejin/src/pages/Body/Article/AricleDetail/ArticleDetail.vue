@@ -1,28 +1,35 @@
 <template>
-    <div>
-        <ArticleMain :body="body"/>
-            <Tool/>
+    <div class="ArticleDetail">
+        <ArticleMain :id="$route.query.id"/>
+        <Relativity />
+        <Catalog/>
+        <Tool/>
     </div>
 </template>
 
 <script>
 import Tool from './components/Tool.vue'
 import ArticleMain from './components/ArticleMain.vue'
-// import Catalog from './components/Catalog.vue'
-// import Relativity from './components/Relativity.vue'
+import Catalog from './components/Catalog.vue'
+import Relativity from './components/Relativity.vue'
 export default {
     data(){
         return{
-            body:''
+            id:''
         }
     },
-    components:{ArticleMain,Tool},
+    components:{ArticleMain,Tool,Catalog,Relativity},
     mounted(){
-       this.body=this.$route.query.body
     }
 }
 </script>
 
 <style>
-
+    .ArticleDetail{
+        position: relative;
+        width: auto;
+        height: auto;
+        margin: 0 auto;
+        background-color: white;
+    }
 </style>

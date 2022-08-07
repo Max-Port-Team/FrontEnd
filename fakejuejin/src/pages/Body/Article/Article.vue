@@ -34,13 +34,13 @@ export default {
       }
     },
     Articledetail(){
-      let routeData = this.$router.resolve({name: "articledetail",query:{body:this.one.body}}); 
+      let routeData = this.$router.resolve({name: "articledetail",query:{id:this.one.id}}); 
       window.open(routeData.href, '_blank');
     }
   },
   computed: {
     timeage() {
-      return time.ago(this.one.time);
+      return time.ago(new Date(this.one.time).valueOf());
     },
     srcrandom(){
       return require('../../../assets/'+Math.round(Math.random()*10)+'.jpg');

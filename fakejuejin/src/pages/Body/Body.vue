@@ -7,7 +7,7 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="node in ArticleList" :key="node.id" :one="node"></Article>
+    <Article v-for="(node,key) in ArticleList" :key="key" :one="node"></Article>
   </div>
 </template>
 
@@ -26,9 +26,8 @@ export default {
   methods:{
     finiteScroll(){
       let {scrollHeight,pageYOffset}=this;
-      //  console.log(scrollHeight-pageYOffset,this.clientHeight+100)
       if(scrollHeight-pageYOffset<this.clientHeight+800){
-          fetch("http://localhost:8080/api/MaxPort/article/queryAllArticle").then((res)=>{
+          fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle").then((res)=>{
            return res.json()
           },(err)=>{console.log(err)}).then((res)=>{
             this.ArticleList=[...this.ArticleList,...res]
@@ -60,7 +59,7 @@ export default {
   }
   ,
   mounted() {
-    fetch("http://localhost:8080/api/MaxPort/article/queryAllArticle")
+    fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle")
       .then((res) => {
         return res.json();
       })
