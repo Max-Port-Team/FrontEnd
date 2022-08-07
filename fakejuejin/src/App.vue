@@ -61,9 +61,31 @@ export default {
      width: 100%!important;
    }
   }
-  .AppFooter{
-    position:fixed;
-    right: 20px;
-    bottom: 20px;
+  .AppFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
   }
+  .footer_btn {
+    margin: 12px 0 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 1;
+    color: #909090;
+    background-color: #fff;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(50, 50, 50, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
 </style>
