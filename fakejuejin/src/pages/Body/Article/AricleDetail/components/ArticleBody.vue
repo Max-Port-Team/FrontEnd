@@ -3,8 +3,8 @@
 </template>
 <script>
 import { marked } from "marked";
-const posthtml = require('posthtml')
-const highlight = require('posthtml-prism')
+const posthtml = require("posthtml");
+const highlight = require("posthtml-prism");
 export default {
   name: "ArticleBody",
   props: ["body"],
@@ -20,8 +20,11 @@ export default {
         clearInterval(timer);
         posthtml([highlight({ inline: true })])
           .process(html)
-          .then((result) =>{this.$refs.ArticleBody.innerHTML=result.html;
-            document.querySelectorAll('pre').forEach(v=>v.className='language-')
+          .then((result) => {
+            this.$refs.ArticleBody.innerHTML = result.html;
+            document
+              .querySelectorAll("pre")
+              .forEach((v) => (v.className = "language-"));
           });
       }
     }, 100);

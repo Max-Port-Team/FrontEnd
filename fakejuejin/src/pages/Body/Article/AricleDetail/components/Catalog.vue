@@ -5,9 +5,13 @@
       href="//at.alicdn.com/t/font_1473319176_4914331.css"
     />
     <header class="catalog-header">目录</header>
-    <ul class="catalog-body">
-      <li v-for="(one, key) in 30" :key="key">
-        <a href="">目录{{ key }}</a>
+    <ul class="catalog-body" ref="scrollBody">
+      <li v-for="(one, key) in catalogList" :key="key">
+        <a
+          :href="`#${one.id}`"
+          :style="`textIndent:${(one.getAttribute('h') * 1 - maxH) * 30}px`"
+          >{{ one.innerHTML }}</a
+        >
       </li>
     </ul>
   </div>
@@ -15,26 +19,74 @@
 
 <script>
 export default {
-  mounted(){
-    document.addEventListener('scroll',()=>{
-      if(window.pageYOffset>1245){
-        this.$refs.container.className='catalog-container2'
+  name: "catalog",
+  data() {
+    return {
+      catalogList: [],
+      maxH: 0,
+    };
+  },
+  methods: {
+    throttle(fnc, time) {
+      let flag = true;
+      return () => {
+        if (flag) {
+          flag = false;
+          fnc();
+          setTimeout(() => {
+            flag = true;
+          }, time);
+        }
+      };
+    },
+  },
+  mounted() {
+    document.addEventListener("scroll", () => {
+      if (window.pageYOffset > 1245) {
+        this.$refs.container.className = "catalog-container2";
       }
-      if(window.pageYOffset<1245){
-        this.$refs.container.className='catalog-container'
+      if (window.pageYOffset < 1245) {
+        this.$refs.container.className = "catalog-container";
       }
-
-    })
-  }
+    });
+    const timer = setInterval(() => {
+      const ArticleBody = document.querySelector(".ArticleBody");
+      if (ArticleBody.hasChildNodes()) {
+        clearInterval(timer);
+        for (let i = 6; i >= 1; i--) {
+          ArticleBody.querySelectorAll(`h${i}`).forEach((v) => {
+            v.setAttribute("H", i);
+            this.maxH = i;
+          });
+        }
+        this.catalogList.push(...ArticleBody.querySelectorAll("[H]"));
+        let catalogscroll = this.throttle(() => {
+          let lis = document
+            .querySelector(".catalog-body")
+            .querySelectorAll("li");
+          this.catalogList.forEach((v, key) => {
+            if (
+              v.offsetTop+125 <= window.pageYOffset &&
+              this.catalogList[key + 1].offsetTop+125 >= window.pageYOffset
+            ) {
+              lis.forEach((v)=>{v.classList.remove('catalog-liborder')})
+                lis[key].classList.add('catalog-liborder')
+                this.$refs.scrollBody.scrollTop=lis[key].offsetTop-98-this.$refs.scrollBody.clientWidth/2-50;
+            }
+          });
+        }, 10);
+        document.addEventListener("scroll", catalogscroll);
+      }
+    }, 100);
+  },
 };
 </script>
 
 <style scoped>
-
 .catalog-container {
   position: absolute;
   width: 250px;
-  height: 620px;
+  max-height: 620px;
   right: -267px;
   top: 1090px;
   padding-top: 0px;
@@ -70,9 +122,14 @@ export default {
   height: 15px;
   margin-top: 25px;
   border-radius: 1px;
+  
+}
+.catalog-liborder {
   border: 2px solid transparent;
   border-left: 4px solid rgb(43, 133, 250);
+  color: rgb(43, 133, 250);
 }
+
 .catalog-body a {
   position: absolute;
   color: inherit;
