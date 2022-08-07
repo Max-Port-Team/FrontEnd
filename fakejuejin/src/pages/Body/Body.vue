@@ -26,7 +26,6 @@ export default {
   methods:{
     finiteScroll(){
       let {scrollHeight,pageYOffset}=this;
-      //  console.log(scrollHeight-pageYOffset,this.clientHeight+100)
       if(scrollHeight-pageYOffset<this.clientHeight+800){
           fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle").then((res)=>{
            return res.json()

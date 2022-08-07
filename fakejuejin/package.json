@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "marked": "^4.0.18",
     "micromarkdown": "^0.3.4-a",
+    "posthtml": "^0.16.6",
+    "posthtml-prism": "^1.0.4",
     "time.js": "^0.0.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.4"
