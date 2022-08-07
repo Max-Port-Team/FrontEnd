@@ -20,7 +20,7 @@ export default {
 .tools-container{
     position: fixed;
     margin-left: -7rem;
-    top: 220px;
+    top: 160px;
     z-index: 2;
 }
 .tools-container div{
@@ -32,6 +32,9 @@ export default {
     background-color: white;
     border-radius: 50%;
     margin-top: 30px;
+}
+.tools-container div:hover{
+        color: rgb(90, 90, 90);
 }
 .tools-container i{
     font-size: 20px;

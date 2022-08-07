@@ -12,7 +12,10 @@
 
 <script>
 export default {
-
+        name:'Relativity',
+        mounted(){
+            
+        }
 }
 </script>
 

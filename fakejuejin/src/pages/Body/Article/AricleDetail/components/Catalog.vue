@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog-container">
+  <div class="catalog-container" ref="container">
     <link
       rel="stylesheet"
       href="//at.alicdn.com/t/font_1473319176_4914331.css"
@@ -14,7 +14,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted(){
+    document.addEventListener('scroll',()=>{
+      if(window.pageYOffset>1245){
+        this.$refs.container.className='catalog-container2'
+      }
+      if(window.pageYOffset<1245){
+        this.$refs.container.className='catalog-container'
+      }
+
+    })
+  }
+};
 </script>
 
 <style scoped>
@@ -25,6 +37,16 @@ export default {};
   height: 620px;
   right: -267px;
   top: 1090px;
+  padding-top: 0px;
+  background-color: white;
+  z-index: 1000;
+}
+.catalog-container2 {
+  position: fixed;
+  width: 250px;
+  height: 620px;
+  margin-left: 915px;
+  top: 20px;
   padding-top: 0px;
   background-color: white;
   z-index: 1000;
