@@ -4,7 +4,7 @@
       rel="stylesheet"
       href="//at.alicdn.com/t/font_1473319176_4914331.css"
     />
-    <header class="catalog-header">目录</header>
+    <header class="catalog-header" v-if='maxH'>目录</header>
     <ul class="catalog-body" ref="scrollBody">
       <li v-for="(one, key) in catalogList" :key="key">
         <a
@@ -96,7 +96,7 @@ export default {
 .catalog-container2 {
   position: fixed;
   width: 250px;
-  height: 620px;
+  max-height: 620px;
   margin-left: 915px;
   top: 20px;
   padding-top: 0px;
@@ -113,7 +113,7 @@ export default {
   border-bottom: 1px solid #e4e6eb;
 }
 .catalog-body {
-  height: 540px;
+  max-height: 540px;
   list-style: none;
   overflow: scroll;
 }
