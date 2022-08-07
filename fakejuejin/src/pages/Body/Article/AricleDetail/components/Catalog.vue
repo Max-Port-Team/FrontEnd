@@ -18,46 +18,6 @@ export default {};
 </script>
 
 <style scoped>
-@font-face {
-  font-family: "iconfont"; /* Project id 3448432 */
-  src: url('//at.alicdn.com/t/c/font_3448432_sekyq3fh2l.woff2?t=1659775886942') format('woff2'),
-       url('//at.alicdn.com/t/c/font_3448432_sekyq3fh2l.woff?t=1659775886942') format('woff'),
-       url('//at.alicdn.com/t/c/font_3448432_sekyq3fh2l.ttf?t=1659775886942') format('truetype');
-}
-
-.iconfont {
-  font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-shoucang:before {
-  content: "\e600";
-}
-
-.icon-jinggao:before {
-  content: "\e601";
-}
-
-.icon-duihuaxinxitianchong:before {
-  content: "\e67a";
-}
-
-.icon-bg-fullscreen:before {
-  content: "\e649";
-}
-
-.icon-zhuanfa:before {
-  content: "\e628";
-}
-
-.icon-dianzan_kuai:before {
-  content: "\ec8c";
-}
-
-
 
 .catalog-container {
   position: absolute;
