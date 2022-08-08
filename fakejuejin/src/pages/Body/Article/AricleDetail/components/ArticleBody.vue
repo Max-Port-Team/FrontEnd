@@ -21,16 +21,24 @@ export default {
         posthtml([highlight({ inline: true })])
           .process(html)
           .then((result) => {
-            this.$refs.ArticleBody.innerHTML = result.html;
-            document.querySelectorAll("pre").forEach((v) => (v.className = "language-"));
+            this.$refs.ArticleBody.innerHTML = html;
+            document
+              .querySelectorAll("pre")
+              .forEach((v) => (v.className = "language-css"));
           })
-          .then(()=>{
-
+          .then(() => {
+            const srcript = document.createElement("script");
+            srcript.src = "./index.js";
+            document.body.appendChild(srcript);
           })
+          .then(() => {
+            document.querySelectorAll("pre").forEach((v) => {
+              console.log(v.lastChild);
+            });
+          });
       }
     }, 100);
   },
-
 };
 </script>
 
