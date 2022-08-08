@@ -1,12 +1,14 @@
 <template>
   <div class="HeaderContainer">
-      我是Header
+      <Nav/>
   </div>
 </template>
 
 <script>
+import Nav from './components/Nav.vue';
 export default {
-
+    
+    components: { Nav }
 }
 </script>
 
