@@ -37,7 +37,7 @@ export default {
 .Relativity {
   position: absolute;
   width: 210px;
-  height: 510px;
+  height: auto;
   top: 520px;
   right: -265px;
   padding: 20px;

@@ -22,13 +22,15 @@ export default {
           .process(html)
           .then((result) => {
             this.$refs.ArticleBody.innerHTML = result.html;
-            document
-              .querySelectorAll("pre")
-              .forEach((v) => (v.className = "language-"));
-          });
+            document.querySelectorAll("pre").forEach((v) => (v.className = "language-"));
+          })
+          .then(()=>{
+
+          })
       }
     }, 100);
   },
+
 };
 </script>
 
@@ -36,8 +38,11 @@ export default {
 .ArticleBody {
   width: 90%;
   padding: 5%;
-  text-indent: 10px;
-  letter-spacing: 3px;
-  white-space: pre-line;
+  word-break: break-word;
+  line-height: 28px;
+  font-weight: 400;
+  font-size: 16px;
+  overflow-x: hidden;
+  color: #333;
 }
 </style>
