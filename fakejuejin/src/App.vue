@@ -6,8 +6,8 @@
       <SideBar/>
     </main>
     <footer class="AppFooter">
+      <RollUp/>
       <FeedBack/>
-      <ClassifcationBtn/>
     </footer> 
   </div>
 </template>
@@ -15,13 +15,13 @@
 <script>
 import Header from './component/Header/Header.vue'
 import SideBar from './component/SideBar/SideBar.vue'
-import ClassifcationBtn from './component/ClassifcationBtn.vue'
 import FeedBack from './component/FeedBack.vue'
+import RollUp from './component/RollUp.vue'
 import Body from './pages/Body/Body.vue'
 export default {
   name: 'App',
   components: {
-    Header, SideBar,ClassifcationBtn,FeedBack,Body
+    Header, SideBar,RollUp,FeedBack,Body
   },
   mounted(){
     if(this.$route.path=='/articledetail'){

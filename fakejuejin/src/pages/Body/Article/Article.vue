@@ -1,15 +1,16 @@
 <template>
   <div class="ArticleContainer" @click="Articledetail">
     <header class="article-header">
-      <span>奔跑的lili</span><span>{{ timeage }}</span
-      ><span>{{ one.tag }}</span>
+      <span id="article-name">奔跑的lili</span>
+      <span id="article-timeage">{{ timeage }}</span>
+      <span id="article-tag">{{ one.tag }}</span>
     </header>
     <h3 class="article-title">{{ one.title }}</h3>
     <h5 class="article-fake-body">{{strSplit()}}</h5>
     <footer class="article-footer">
-        <span>{{Math.round(Math.random()*300)}}</span>
-        <span>{{Math.round(Math.random()*200)}}</span>
-        <span>{{Math.round(Math.random()*100)}}</span>
+        <span id="footer1">{{Math.round(Math.random()*300)}}</span>
+        <span id="footer2">{{Math.round(Math.random()*200)}}</span>
+        <span id="footer3">{{Math.round(Math.random()*100)}}</span>
     </footer>
     <img :src='srcrandom' class="article-img" v-if="appear">
   </div>
@@ -69,14 +70,14 @@ export default {
   height: 20px;
  
 }
-.article-header :nth-child(1) {
+#article-name {
   font-size: 13px;
   color: #000;
   padding-left: 5px;
   padding-right: 5px;
   border-right: 1px solid rgb(168, 167, 167);
 }
-.article-header :nth-child(2) {
+#article-timeage {
   line-height: 22px;
   font-size: 13px;
   color: #86909c;
@@ -84,7 +85,7 @@ export default {
   padding-right: 5px;
   border-right: 1px solid rgb(168, 167, 167);
 }
-.article-header :nth-child(3) {
+#article-tag {
   font-size: 13px;
   color: #86909c;
   padding-left: 5px;
@@ -112,7 +113,7 @@ export default {
     color:rgb(78, 89, 105);
     font-size: 13px;
 }
-.article-footer :nth-child(1){
+#footer1{
     display: inline-block;
     text-indent: 20px;
     line-height: 15px;
@@ -121,7 +122,7 @@ export default {
     background-image: url("https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/view.1eda8fa.png");
     background-size: 100% 100%; 
 }
-.article-footer :nth-child(2){
+#footer2{
     display: inline-block;
     text-indent: 20px;
     line-height: 15px;
@@ -131,7 +132,7 @@ export default {
      background-size: 100% 100%; 
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJ9SURBVHgB7VZNbtNQEP7GP7AkN8DcoJyA5gRNTwCR2kqsUm9YEKEaoZRl0hUSBLWcAHOCpjdIT1AfIewgTjzM+AccxwHXLRYS/STnvbyxZ743b34e8L+DcEMMhu+fERk7DLTAuAwRjjz3eVD1+xsROD75eARmr7AczDlsVyVhoCbeDt85mXHmqLtkbst0Ko9jk31aVU9tAgvYW7FxYNJ3D85eufuTOZtKYiZu3X4z/LBdRU9tAia4E0+YL7I1z+3OmPEpkWOrip7aBED0RAcb7K8KeBb/alD+LQIa+TI48kxfuAfTVSlVMlybgAafpN1RYgujopwIOzpGEhuogGuloTc8bd2j5TmS8/VfHu7t5uUaeCaRygORPaqi00JFJAVn2UuNa667xXfEeJZ+rePR+Kool7gIQg67+RpBJTvo5QMoZHPXxFLW8Tld2lhoUqMOfg/JlKjdT2Pnpwf0bDlx3worG1EnPlENF0m5OayO5+7NyjRLHXgMfCsNQhumrBviRfRAhnqyu0KAYXmpcX/BfKKekL+dvBIheOUddkuNK7QO6A43ycXDvolYr5OtGTnlD3VU41rVZLdfccvIipMYDdYINAHZZJyicgR+4wQ0hbVH6Px7RBeNE9BM0lGbVxorTRNImhcxf8mvNxcDafOywBM0TUCqqEa/I09QbF6NECDQdjKuN6hGCJSlX2MENqXfGgFKS6hlmA9wi7hvLJ/qWEy/DL96AfMlEXWkU/mD0XiCkjud7kRk56iOltwRYz3ShM7KXlhpx4PheBR3qxzS6zbSi0YtyOZe9919D38ioNC2vIDl6NyQC2bWtzWVomvf93gWwg7KXH+HfwY/AGsn+Lf3Dim6AAAAAElFTkSuQmCC);
 }
-.article-footer :nth-child(3){
+#footer3{
     display: inline-block;
     text-indent: 20px;
     line-height: 15px;

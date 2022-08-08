@@ -21,10 +21,20 @@ export default {
         posthtml([highlight({ inline: true })])
           .process(html)
           .then((result) => {
-            this.$refs.ArticleBody.innerHTML = result.html;
+            this.$refs.ArticleBody.innerHTML = html;
             document
               .querySelectorAll("pre")
-              .forEach((v) => (v.className = "language-"));
+              .forEach((v) => (v.className = "language-css"));
+          })
+          .then(() => {
+            const srcript = document.createElement("script");
+            srcript.src = "./index.js";
+            document.body.appendChild(srcript);
+          })
+          .then(() => {
+            document.querySelectorAll("pre").forEach((v) => {
+              console.log(v.lastChild);
+            });
           });
       }
     }, 100);
@@ -36,8 +46,11 @@ export default {
 .ArticleBody {
   width: 90%;
   padding: 5%;
-  text-indent: 10px;
-  letter-spacing: 3px;
-  white-space: pre-line;
+  word-break: break-word;
+  line-height: 28px;
+  font-weight: 400;
+  font-size: 16px;
+  overflow-x: hidden;
+  color: #333;
 }
 </style>
