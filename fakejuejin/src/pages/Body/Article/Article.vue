@@ -1,7 +1,7 @@
 <template>
   <div class="ArticleContainer" @click="Articledetail">
     <header class="article-header">
-      <span id="article-name">奔跑的lili</span>
+      <span id="article-name">{{one.authorName}}</span>
       <span id="article-timeage">{{ timeage }}</span>
       <span id="article-tag">{{ one.tag }}</span>
     </header>
