@@ -115,7 +115,17 @@ export default {
 .catalog-body {
   max-height: 540px;
   list-style: none;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+.catalog-body::-webkit-scrollbar{ 
+  width:6px; 
+}
+.catalog-body::-webkit-scrollbar-thumb{
+  height:auto;
+  width: 6px;
+  border-radius: 3px;
+  background-color: rgb(228, 230, 235);
 }
 .catalog-body li {
   position: relative;

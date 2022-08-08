@@ -44,7 +44,7 @@ export default {
       return time.ago(new Date(this.one.time).valueOf());
     },
     srcrandom(){
-      return require('../../../assets/'+Math.round(Math.random()*10)+'.jpg');
+      return require('../../../assets/'+Math.round(Math.random()*10)+'.webp');
     },
     appear(){
       return Math.random()>0.6?true:false
