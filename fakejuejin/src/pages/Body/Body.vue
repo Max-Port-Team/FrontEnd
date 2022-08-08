@@ -34,13 +34,6 @@ export default {
           },(err)=>{console.log(err)})
       }
     },
-    antishake(fnc,dalay){
-        let timer=null
-        return ()=>{
-          clearTimeout(timer)
-          timer=setTimeout(fnc,dalay)
-        }
-    },
     throttle(fnc,time){
         let flag=true
         return ()=>{

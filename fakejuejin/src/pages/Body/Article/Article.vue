@@ -1,7 +1,7 @@
 <template>
   <div class="ArticleContainer" @click="Articledetail">
     <header class="article-header">
-      <span id="article-name">奔跑的lili</span>
+      <span id="article-name">{{one.authorName}}</span>
       <span id="article-timeage">{{ timeage }}</span>
       <span id="article-tag">{{ one.tag }}</span>
     </header>
@@ -44,7 +44,7 @@ export default {
       return time.ago(new Date(this.one.time).valueOf());
     },
     srcrandom(){
-      return require('../../../assets/'+Math.round(Math.random()*10)+'.jpg');
+      return require('../../../assets/'+Math.round(Math.random()*10)+'.webp');
     },
     appear(){
       return Math.random()>0.6?true:false
