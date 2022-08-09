@@ -1,6 +1,7 @@
 <template>
   <div class="HeaderContainer">
       <Nav/>
+      <hr>
   </div>
 </template>
 
