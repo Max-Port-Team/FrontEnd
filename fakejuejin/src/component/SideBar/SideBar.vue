@@ -1,20 +1,23 @@
 <template>
-  <div class="SiderBarContainer">
-      我是SiderBar
-  </div>
+  <div class="SiderBarContainer"><user-sidebar /></div>
 </template>
 
 <script>
+import UserSidebar from "../../pages/User/components/UserSidebar.vue";
 export default {
-
-}
+  name: "SideBar",
+  components: { UserSidebar },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
 
 <style scoped>
-    .SiderBarContainer{
-        width: 250px;
-        height: 500px;
-        border: 1px solid black;
-        top: 0;
-    }
+.SiderBarContainer {
+  width: 250px;
+  height: 500px;
+  top: 0;
+}
 </style>
