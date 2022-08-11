@@ -1,15 +1,15 @@
 <template>
     <div id="root">
-        <router-link to="/">综合</router-link>
-        <router-link to="">关注</router-link>
-        <router-link to="">后端</router-link>
-        <router-link to="">前端</router-link>
-        <router-link to="">Android</router-link>
-        <router-link to="">iOS</router-link>
-        <router-link to="">人工智能</router-link>
-        <router-link to="">开发工具</router-link>
-        <router-link to="">代码人生</router-link>
-        <router-link to="">阅读</router-link>
+        <router-link to="/" exact-active-class="active">综合</router-link>
+        <!-- <router-link to="/" exact-active-class="active">关注</router-link> -->
+        <router-link to="/Tag/BackEnd" exact-active-class="active">后端</router-link>
+        <router-link to="/Tag/FrontEnd" exact-active-class="active">前端</router-link>
+        <router-link to="/Tag/Android" exact-active-class="active">Android</router-link>
+        <router-link to="/Tag/iOS" exact-active-class="active">iOS</router-link>
+        <router-link to="/Tag/AI" exact-active-class="active">人工智能</router-link>
+        <router-link to="/Tag/Freebie" exact-active-class="active">开发工具</router-link>
+        <router-link to="/Tag/Career" exact-active-class="active">代码人生</router-link>
+        <router-link to="/Tag/Article" exact-active-class="active">阅读</router-link>
     </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 <style scoped>
     #root{
         width: 50%;
-        height: 40%;
+        height: 40px;
         position: relative;
         display:flex;
         justify-content:space-between;
@@ -37,6 +37,9 @@ export default {
         color: #71777c;
     }
     a:hover{
+        color: #007fff;
+    }
+    .active{
         color: #007fff;
     }
 </style>

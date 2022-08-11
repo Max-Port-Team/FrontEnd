@@ -5,7 +5,8 @@
             <li>
                 <ul class="nav-router-list">
                     <li v-for="link in links" :key="link.id">
-                        <router-link :to="link.path">{{link.name}}</router-link>
+                        <router-link :to="link.path" exact-active-class="active" :class="{ active: IsActive(link.path) }">{{link.name}}
+                        </router-link>
                     </li>
                     <li><a href="https://juejin.cn/app">APP</a></li>
                     <li><a href="https://juejin.cn/extension">插件</a></li>
@@ -29,11 +30,11 @@ export default {
         return {
             links: [
                 { id: 0, name: "首页", path: "/" },
-                { id: 1, name: "沸点", path: "/" },
-                { id: 2, name: "课程", path: "/" },
-                { id: 3, name: "直播", path: "/" },
-                { id: 4, name: "活动", path: "/" },
-                { id: 5, name: "商城", path: "/" },
+                { id: 1, name: "沸点", path: "/pins" },
+                { id: 2, name: "课程", path: "/course" },
+                { id: 3, name: "直播", path: "/live" },
+                { id: 4, name: "活动", path: "/events" },
+                { id: 5, name: "商城", path: "/shop" },
                 // { id: 6, name: "APP", path: "/APP" },
                 // { id: 7, name: "插件", path: "/" },
             ],
@@ -44,6 +45,11 @@ export default {
     methods: {
         changeShowMenu(status) {
             this.showMenu=status;
+        },
+        IsActive(path) {
+            if (path == '/' && this.$route.path.match(/^\/Tag\/((?:[^\/]+?))(?:\/(?=$))?$/i)) {
+                return true;
+            }
         }
     },
     components: { NavMenu }
@@ -109,6 +115,16 @@ export default {
         width: 100%;
         right: 0;
 
+    }
+    .active::before{
+        content: "";
+        width: 100%!important;
+        height: 3px;
+        position: absolute;
+        background: #007fff;
+        top: 100%;
+        right: 0!important;
+        transition: all .5s;
     }
     .nav-router-list li a{
         display:inline-block;

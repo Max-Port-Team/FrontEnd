@@ -5,7 +5,13 @@ export default new VueRouter({
     routes:[
         {
             path:'/',
-            component:Body
+            component: Body,
+            children: [
+                {
+                    path: 'Tag/:tag'
+                    
+                }
+            ]
         },
         {
             name:'articledetail',
