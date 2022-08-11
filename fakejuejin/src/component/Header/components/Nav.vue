@@ -4,7 +4,11 @@
         <ul class="nav-list">
             <li>
                 <ul class="nav-router-list">
-                    <li v-for="link in links"><a href="/">{{link}}</a></li>
+                    <li v-for="link in links" :key="link.id">
+                        <router-link :to="link.path">{{link.name}}</router-link>
+                    </li>
+                    <li><a href="https://juejin.cn/app">APP</a></li>
+                    <li><a href="https://juejin.cn/extension">插件</a></li>
                 </ul>
             </li>
             <li>
@@ -23,7 +27,16 @@ import NavMenu from "./NavMenu.vue";
 export default {
     data() {
         return {
-            links: ["首页", "沸点", "课程", "直播", "活动", "商城", "APP", "插件"],
+            links: [
+                { id: 0, name: "首页", path: "/" },
+                { id: 1, name: "沸点", path: "/" },
+                { id: 2, name: "课程", path: "/" },
+                { id: 3, name: "直播", path: "/" },
+                { id: 4, name: "活动", path: "/" },
+                { id: 5, name: "商城", path: "/" },
+                // { id: 6, name: "APP", path: "/APP" },
+                // { id: 7, name: "插件", path: "/" },
+            ],
             showMenu: false,
             loggedIn:1
         };
@@ -76,15 +89,36 @@ export default {
     }
     .nav-router-list li{
         display: flex;
+        position: relative;
         align-items: center;
         justify-content: center;
         width:5rem;
+    }
+    .nav-router-list>li a::before {
+        content: "";
+        width: 0;
+        height: 3px;
+        position: absolute;
+        background: #007fff;
+        top: 100%;
+        right: 50%;
+        transition: all .5s;
+    }
+
+    .nav-router-list>li a:hover::before {
+        width: 100%;
+        right: 0;
+
     }
     .nav-router-list li a{
         display:inline-block;
         text-decoration: none;
         text-decoration-line: none;
-        color: black
+        color: rgb(81, 87, 103);
+    }
+
+    .nav-router-list li a:hover {
+        color:black;
     }
     .avatar{
         height: 40px;
