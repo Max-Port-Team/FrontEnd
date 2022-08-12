@@ -5,13 +5,13 @@
       <h3>个人成就</h3>
       <div class="list">
         <div class="item">
-          <img src="" /><span>文章被点赞 {{ items.star }}</span>
+          <img src="./icons/1.png" /><span>文章被点赞 {{ items.star }}</span>
         </div>
         <div class="item">
-          <img src="" /><span>文章被阅读 {{ items.read }}</span>
+          <img src="./icons/2.png" /><span>文章被阅读 {{ items.read }}</span>
         </div>
         <div class="item">
-          <img src="" /><span>掘力值 {{ items.value }}</span>
+          <img src="./icons/3.png" /><span>掘力值 {{ items.value }}</span>
         </div>
       </div>
     </div>
@@ -49,9 +49,9 @@ export default {
   data() {
     return {
       items: {
-        star: -1,
+        star: 999,
         read: 4312,
-        value: 114514,
+        value: 12312,
       },
       middle: {
         follow: 39129,
