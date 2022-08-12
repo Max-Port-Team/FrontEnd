@@ -1,5 +1,5 @@
 <template>
-  <div class="SiderBarContainer"><user-sidebar /></div>
+  <div class="SiderBarContainer">SideBar</div>
 </template>
 
 <script>
@@ -19,5 +19,7 @@ export default {
   width: 250px;
   height: 500px;
   top: 0;
+
+  border: 1px solid black;
 }
 </style>
