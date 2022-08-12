@@ -1,20 +1,30 @@
 <template>
-  <div class="SiderBarContainer">
-      我是SiderBar
+  <div class="SideBarContainer">
+    <SignIn></SignIn>
+    <Advertisement></Advertisement>
+    <DownLoad></DownLoad>
   </div>
 </template>
 
 <script>
-export default {
+import SignIn from "./components/SignIn.vue";
+import Advertisement from "./components/Advertisement.vue";
+import DownLoad from "./components/DownLoad.vue";
 
-}
+export default {
+  name: "SideBar",
+  components: {
+    Advertisement,
+    DownLoad,
+    SignIn,
+  },
+};
 </script>
 
 <style scoped>
-    .SiderBarContainer{
-        width: 250px;
-        height: 500px;
-        border: 1px solid black;
-        top: 0;
-    }
+.SideBarContainer {
+  width: 240px;
+  height: 640px;
+  top: 0;
+}
 </style>
