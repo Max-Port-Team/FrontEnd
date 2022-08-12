@@ -1,7 +1,7 @@
 <template>
     <div class="author">
         <div class="user-item">
-            <img src="../../../assets/0.jpg" alt="">
+            <img src="../../../assets/0.webp" alt="">
             <div class="username">???</div>
         </div>
         <div class="stat-item">
