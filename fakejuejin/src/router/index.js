@@ -11,6 +11,12 @@ export default new VueRouter({
                 default: Body,
                 SideBar,
             },
+            children: [
+                {
+                    path: 'Tag/:tag'
+                    
+                }
+            ]
         },
         {
             name: "articledetail",
