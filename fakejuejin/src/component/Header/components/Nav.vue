@@ -17,7 +17,7 @@
                     <img class="avatar" src="../../../assets/5035712059_300x300.png" alt="">
                     <NavMenu v-show="showMenu" />
                 </div>
-                <button v-else></button>
+                <button v-else class="login-button">登录</button>
             </li>
         </ul>
     </div>
@@ -39,8 +39,15 @@ export default {
                 // { id: 7, name: "插件", path: "/" },
             ],
             showMenu: false,
-            loggedIn:1
         };
+    },
+    computed: {
+        loggedIn() {
+            if (window.localStorage.getItem("userName"))
+                return 1
+            else 
+                return 0
+        }
     },
     methods: {
         changeShowMenu(status) {
@@ -142,5 +149,18 @@ export default {
         margin-top:7px;
         margin-right: 20px;
         border-radius: 50%;
+    }
+    .login-button{
+        background: rgba(30, 128, 255, .05);
+        border: 1px solid rgba(30, 128, 255, .3);
+        border-radius: 4px;
+        padding: 0.3rem 1.5rem;
+        color: #007fff;
+        line-height: 1.9rem;
+        font-size: 14px;
+        font-weight: 400;
+        margin-right: 20px;
+        height: 42px;
+        cursor: pointer;
     }
 </style>
