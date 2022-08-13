@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {nanoid} from 'nanoid'
 export default {
   name: "catalog",
   data() {
@@ -59,6 +60,7 @@ export default {
         for (let i = 6; i >= 1; i--) {
           ArticleBody.querySelectorAll(`h${i}`).forEach((v) => {
             v.setAttribute("H", i);
+            v.setAttribute("id", nanoid().slice(0,10));
             this.maxH = i;
           });
         }
