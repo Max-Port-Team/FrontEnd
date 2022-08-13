@@ -8,7 +8,7 @@
     <ul class="catalog-body" ref="scrollBody">
       <li v-for="(one, key) in catalogList" :key="key">
         <a
-          :href="`#${one.id}`"
+          @click="jump(one.id)"
           :style="`textIndent:${(one.getAttribute('h') * 1 - maxH) * 30}px`"
           >{{ one.innerHTML }}</a
         >
@@ -27,6 +27,9 @@ export default {
     };
   },
   methods: {
+    jump(id){
+      document.querySelector(`#${id}`).scrollIntoView(top)
+    },
     throttle(fnc, time) {
       let flag = true;
       return () => {
