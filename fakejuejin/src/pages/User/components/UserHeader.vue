@@ -13,7 +13,8 @@ export default {
 <style>
 .userHeader-container{
     width: 100%;
-    height: 150px;
+    height: 200px;
     border: 1px solid red;
+    background-color: white;
 }
 </style>

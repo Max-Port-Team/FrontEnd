@@ -52,16 +52,16 @@ export default {
   }
   ,
   mounted() {
-    fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle")
+    fetch(`http://43.156.106.129/api/MaxPort/article/${this.$route.params.tag?`queryAllArticleByTag?tag=${this.$route.params.tag}`:'queryAllArticle'}`)
       .then((res) => {
         return res.json();
       })
       .then((res) => {
         this.ArticleList = res;
         this.$refs.FakeArticle.style.display = "none";
-      });
-   let throttleFiniteScroll=this.throttle(this.finiteScroll,1000)
-   document.addEventListener("scroll", () => {
+      });      
+    let throttleFiniteScroll=this.throttle(this.finiteScroll,1000)
+    document.addEventListener("scroll", () => {
       this.scrollHeight = Math.max(
         document.body.scrollHeight,
         document.documentElement.scrollHeight,
@@ -73,6 +73,7 @@ export default {
       this.pageYOffset=window.pageYOffset;
       throttleFiniteScroll()
     });
+   
   },
 };
 </script>
@@ -261,6 +262,7 @@ export default {
 }
 .BodyContainer {
   display: inline-block;
+  padding-top: 20px;
   cursor: pointer;
   width: 700px;
   height: auto;

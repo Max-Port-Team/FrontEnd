@@ -23,6 +23,10 @@ export default {
 <style scoped>
     .HeaderContainer{
         width: 100%;
-        border: 1px solid black;
+        background-color:white;
+    }
+    hr{
+        height: 1px;
+        color: rgb(228, 228, 228);
     }
 </style>

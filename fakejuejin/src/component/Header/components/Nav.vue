@@ -75,6 +75,8 @@ export default {
         width: auto;
     }
     .logo-img img{
+        height: 22px;
+        width: 102px;
         display:block
     }
     .nav-list{
@@ -105,7 +107,7 @@ export default {
         width: 0;
         height: 3px;
         position: absolute;
-        background: #007fff;
+        background: #1171ee;
         top: 100%;
         right: 50%;
         transition: all .5s;
