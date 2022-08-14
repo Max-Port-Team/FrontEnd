@@ -60,6 +60,10 @@ export default {
    .BodyContainer{
      width: 100%!important;
    }
+   .user-container{
+     width: 100%!important;
+   }
+   
   }
   .AppFooter {
     display: flex;

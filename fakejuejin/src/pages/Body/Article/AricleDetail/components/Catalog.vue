@@ -20,6 +20,7 @@
 <script>
 import {nanoid} from 'nanoid'
 export default {
+  
   name: "catalog",
   data() {
     return {

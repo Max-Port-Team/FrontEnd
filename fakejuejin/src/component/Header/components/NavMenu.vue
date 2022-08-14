@@ -59,7 +59,7 @@ export default {
         right: 20px;
         position: absolute;
         background-color:white;
-        border: 1px solid rgba(177, 180, 185, 0.45);
+        border: 1px solid rgba(175, 180, 185, 0.45);
         border-radius:4px;
     }
     li{
