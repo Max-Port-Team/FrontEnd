@@ -21,7 +21,7 @@
 
 <script>
   export default {
-    name: "ClassifcationBtn",
+    name: "FeedBack",
   };
 </script>
 

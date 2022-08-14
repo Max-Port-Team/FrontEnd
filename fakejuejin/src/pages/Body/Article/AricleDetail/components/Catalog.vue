@@ -8,7 +8,7 @@
     <ul class="catalog-body" ref="scrollBody">
       <li v-for="(one, key) in catalogList" :key="key">
         <a
-          :href="`#${one.id}`"
+          @click="jump(one.id)"
           :style="`textIndent:${(one.getAttribute('h') * 1 - maxH) * 30}px`"
           >{{ one.innerHTML }}</a
         >
@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import {nanoid} from 'nanoid'
 export default {
+  
   name: "catalog",
   data() {
     return {
@@ -27,6 +29,10 @@ export default {
     };
   },
   methods: {
+    jump(id){
+      document.querySelector(`#${id}`).scrollIntoView(top)
+    }
+    ,
     throttle(fnc, time) {
       let flag = true;
       return () => {
@@ -56,6 +62,7 @@ export default {
         for (let i = 6; i >= 1; i--) {
           ArticleBody.querySelectorAll(`h${i}`).forEach((v) => {
             v.setAttribute("H", i);
+            v.setAttribute("id", nanoid().slice(0,10));
             this.maxH = i;
           });
         }

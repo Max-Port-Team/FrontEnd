@@ -7,7 +7,7 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="(node,key) in ArticleList" :key="key" :one="node"></Article>
+    <Article v-for="(node,key) in ArticleList" :key="key" :one="node" ></Article>
   </div>
 </template>
 
@@ -242,7 +242,7 @@ export default {
       rgb(230, 230, 230)
     );
   }
-  90% {
+  100% {
     background: linear-gradient(
       to right,
       white,
