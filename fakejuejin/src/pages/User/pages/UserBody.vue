@@ -6,7 +6,7 @@
 
 <script>
 export default {
-
+// http://43.156.106.129/api/MaxPort/people/get-detailed-by-id?id=4
 }
 </script>
 

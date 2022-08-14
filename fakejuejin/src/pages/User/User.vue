@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import UserHeader from "c:/Users/Lenovo/Desktop/仿掘金官网/fakejuejin/src/pages/User/components/UserHeader.vue"
+import UserHeader from "./components/UserHeader.vue"
 export default {
   name:"User",
   components:{UserHeader}
