@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header />
     <main class="AppMain" ref='AppMain'>
       <router-view></router-view>
-      <SideBar/>
+      <router-view name="SideBar"></router-view>
     </main>
     <footer class="AppFooter">
-      <RollUp/>
-      <FeedBack/>
-    </footer> 
+      <RollUp />
+      <FeedBack />
+    </footer>
   </div>
 </template>
 
@@ -60,6 +60,10 @@ export default {
    .BodyContainer{
      width: 100%!important;
    }
+   .user-container{
+     width: 100%!important;
+   }
+   
   }
   .AppFooter {
     display: flex;
@@ -87,5 +91,5 @@ export default {
     justify-content: center;
     cursor: pointer;
   }
-  
+
 </style>
