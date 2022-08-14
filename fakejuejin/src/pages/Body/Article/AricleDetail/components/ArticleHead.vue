@@ -9,10 +9,12 @@
       <!-- 左侧文字 -->
       <div style="float: left">
         <div class="abc">
-          <div class="id">掘金酱</div>
+          <div class="id">
+            {{ this.authorName }}
+          </div>
           <div class="lv"><img src="../../图片/2.png" alt="hh" /></div>
         </div>
-        <div class="time">2022年07月22日 17:06 · 阅读36240</div>
+        <div class="time">{{ articleTime }} · 阅读36240</div>
       </div>
       <!-- 右侧 -->
       <button
@@ -26,11 +28,15 @@
         <span v-if="!isFollow">{{ textguanzhu }}</span>
         <span v-if="isFollow">{{ textyiguanzhu }}</span>
       </button>
+      <button @click="get1">get1</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import { nextTick } from "vue";
+
 export default {
   name: "ArticleHead",
   data() {
@@ -40,10 +46,56 @@ export default {
       textyiguanzhu: "√已关注",
       isFollow: false,
       guanzhustyle: "",
+      id: "",
+      articleTime: "2022年07月22日 17:06",
+      body: "",
+      visit: "",
+      authorName: "掘金酱",
     };
   },
+  created: function () {
+    console.log();
+  },
+  mounted() {
+    this.$bus.$on("getId", (data) => {
+      console.log("我是atriclehead组件，收到了数据", data);
+      this.id = data;
+    });
+    // .finally(() => this.get1());
+    // nextTick(() => this.get1);
+    this.get1();
+  },
+  // updated() {
+  //   this.get1();
+  // },
+  // beforeUpdate() {
+  //   this.get1();
+  // },
+  beforeDestroy() {
+    this.$bus.$off("hello");
+  },
   methods: {
+    get1() {
+      axios
+        .get(
+          `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`
+          // "http://43.156.106.129/api/MaxPort/article/queryAllArticleByAuthor?authorId=3"
+        )
+        .then(
+          (response) => {
+            console.log("请求成功了", response.data);
+            this.articleTime = response.data.time;
+            this.articletitle = response.data.title;
+            this.visit = response.data.visit;
+            this.authorName = response.data.authorName;
+          },
+          (error) => {
+            console.log("请求失败了", error.message);
+          }
+        );
+    },
     change1() {
+      console.log(this.id);
       // if ((this.isFollow = false)) {
       //   this.isFollow = true;
       // } else {
@@ -62,6 +114,7 @@ export default {
           "color:#1e80ff; background:rgba(30,128,255,0.05); bordercolor:rgba(30,128,255,0.3)";
       }
       console.log(this.isFollow);
+      console.log(this.time);
     },
     // 移入
     mouseOver() {
@@ -91,12 +144,12 @@ export default {
   overflow: hidden;
   padding-top: 20px;
   width: 100%;
-  height: 170px;
+  /* height: 170px; */
   /* border: 1px solid red; */
 }
 .articletitle {
   width: 90%;
-  height: 90px;
+  /* height: 90px; */
   /* border: 1px solid purple; */
   margin-left: 5%;
   font-size: 35px;
