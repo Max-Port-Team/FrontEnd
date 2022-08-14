@@ -1,29 +1,29 @@
 import VueRouter from "vue-router";
-import Body from '../pages/Body/Body.vue'
-import ArticleDetail from '../pages/Body/Article/AricleDetail/ArticleDetail.vue'
-import User from '../pages/User/User.vue'
-import UserBody from "../pages/User/pages/UserBody.vue"
+import Body from "../pages/Body/Body.vue";
+import ArticleDetail from "../pages/Body/Article/AricleDetail/ArticleDetail.vue";
+import SideBar from "../component/SideBar/SideBar.vue";
+import ArticleSideBar from "../component/SideBar/ArticleSideBar.vue";
 export default new VueRouter({
-    routes:[
-        {
-            path:'/',
-            component:Body
-        },
-        {
-            name:'articledetail',
-            path:'/articledetail',
-            component:ArticleDetail,
-        },
-        {
-            name:'user',
-            path:'/user',
-            component:User,
-            children:[
+    routes: [{
+            path: "/",
+            components: {
+                default: Body,
+                SideBar,
+            },
+            children: [
                 {
-                    path:'body',
-                    component:UserBody
+                    path: 'Tag/:tag'
+                    
                 }
-            ]  
-        }
-    ]
-})
+            ]
+        },
+        {
+            name: "articledetail",
+            path: "/articledetail",
+            components: {
+                default: ArticleDetail,
+                SideBar: ArticleSideBar,
+            },
+        },
+    ],
+});

@@ -31,8 +31,7 @@ export default {
   methods: {
     jump(id){
       document.querySelector(`#${id}`).scrollIntoView(top)
-    }
-    ,
+    },
     throttle(fnc, time) {
       let flag = true;
       return () => {
@@ -95,7 +94,7 @@ export default {
   width: 250px;
   max-height: 620px;
   right: -267px;
-  top: 1090px;
+  top: 870px;
   padding-top: 0px;
   background-color: white;
   z-index: 1000;
@@ -139,7 +138,7 @@ export default {
   height: 15px;
   margin-top: 25px;
   border-radius: 1px;
-  
+
 }
 .catalog-liborder {
   border: 2px solid transparent;
