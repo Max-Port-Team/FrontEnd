@@ -5,14 +5,18 @@
     </div>
     <div class="xiace">
       <!-- 左侧图片 -->
-      <div class="photo"><img src="../../图片/1.png" alt="hh" /></div>
+      <div class="photo">
+        <img src="../../../../../assets/11.webp" alt="hh" />
+      </div>
       <!-- 左侧文字 -->
       <div style="float: left">
         <div class="abc">
           <div class="id">
             {{ this.authorName }}
           </div>
-          <div class="lv"><img src="../../图片/2.png" alt="hh" /></div>
+          <div class="lv">
+            <img src="../../../../../assets/12.webp" alt="hh" />
+          </div>
         </div>
         <div class="time">{{ articleTime }} · 阅读{{ visit }}</div>
       </div>
@@ -35,7 +39,7 @@
 
 <script>
 import axios from "axios";
-// import time from "time.js";
+import time from "time.js";
 // import { nextTick } from "vue";
 
 export default {
@@ -84,16 +88,19 @@ export default {
       // console.log(this.id);
       axios
         .get(
-          `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`
-          // "http://43.156.106.129/api/MaxPort/article/queryAllArticleByAuthor?authorId=3"
+          `http://43.156.106.129/api/MaxPort/article/queryArticleByArticleId?articleId=${this.id}`
+          // "http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=7"
         )
         .then(
           (response) => {
-            console.log("请求成功了", response.data);
-            this.articleTime = response.data.time;
-            this.articletitle = response.data.title;
-            this.visit = response.data.visit;
-            this.authorName = response.data.authorName;
+            // console.log("请求成功了", response.data);
+            this.articleTime = time(
+              new Date(response.data[0].time),
+              "%y年%M月%d日 %h:%m"
+            );
+            this.articletitle = response.data[0].title;
+            this.visit = response.data[0].visit;
+            this.authorName = response.data[0].authorName;
           },
           (error) => {
             console.log("请求失败了", error.message);
@@ -119,8 +126,8 @@ export default {
         this.guanzhustyle =
           "color:#1e80ff; background:rgba(30,128,255,0.05); bordercolor:rgba(30,128,255,0.3)";
       }
-      console.log(this.isFollow);
-      console.log(this.time);
+      // console.log(this.isFollow);
+      // console.log(this.time);
     },
     // 移入
     mouseOver() {
