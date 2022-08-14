@@ -1,7 +1,7 @@
 <template>
   <div class="ArticleDetail">
     <ArticleMain :id="$route.query.id" />
-    <ArticleHead :id="$route.query.id" />
+    <!-- <ArticleHead :id="$route.query.id" /> -->
     <Relativity />
     <Catalog />
     <Tool />
@@ -11,7 +11,7 @@
 <script>
 import Tool from "./components/Tool.vue";
 import ArticleMain from "./components/ArticleMain.vue";
-import ArticleHead from "./components/ArticleHead.vue";
+// import ArticleHead from "./components/ArticleHead.vue";
 import Catalog from "./components/Catalog.vue";
 import Relativity from "./components/Relativity.vue";
 export default {
@@ -20,7 +20,7 @@ export default {
       id: "",
     };
   },
-  components: { ArticleMain, ArticleHead, Tool, Catalog, Relativity },
+  components: { ArticleMain, Tool, Catalog, Relativity },
   mounted() {},
 };
 </script>

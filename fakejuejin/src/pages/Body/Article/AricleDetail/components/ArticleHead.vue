@@ -14,7 +14,7 @@
           </div>
           <div class="lv"><img src="../../图片/2.png" alt="hh" /></div>
         </div>
-        <div class="time">{{ articleTime }} · 阅读36240</div>
+        <div class="time">{{ articleTime }} · 阅读{{ visit }}</div>
       </div>
       <!-- 右侧 -->
       <button
@@ -28,7 +28,7 @@
         <span v-if="!isFollow">{{ textguanzhu }}</span>
         <span v-if="isFollow">{{ textyiguanzhu }}</span>
       </button>
-      <button @click="get1">get1</button>
+      <!-- <button @click="get1">get1</button> -->
     </div>
   </div>
 </template>
@@ -36,36 +36,39 @@
 <script>
 import axios from "axios";
 // import time from "time.js";
-import { nextTick } from "vue";
+// import { nextTick } from "vue";
 
 export default {
   name: "ArticleHead",
   data() {
     return {
-      articletitle: "携手创作，共同成长，8月更文活动奖品大升级！|掘金·日新计划",
+      articletitle: "", //携手创作，共同成长，8月更文活动奖品大升级！|掘金·日新计划
       textguanzhu: "+关注",
       textyiguanzhu: "√已关注",
       isFollow: false,
       guanzhustyle: "",
-      articleTime: "2022年07月22日 17:06",
+      articleTime: "", //2022年07月22日 17:06
       body: "",
+      // id: "",
       visit: "",
-      authorName: "掘金酱",
+      authorName: "", //掘金酱
     };
   },
+
   props: ["id"],
   created: function () {
     console.log();
   },
   mounted() {
-    // this.$bus.$on("getId", (data) => {
-    //   console.log("我是atriclehead组件，收到了数据", data);
-    //   this.id = data;
-    // });
-
-    // .finally(() => this.get1());
-    // nextTick(() => this.get1);
+    console.log(this.id);
+    //   this.$bus.$on("getId", (data) => {
+    //     console.log("我是atriclehead组件，收到了数据", data);
+    //     this.id = data;
+    //   });
     this.get1();
+    //   // .finally(() => this.get1());
+    //   // nextTick(() => this.get1);
+    //   // this.$nextTick(this.get1());
   },
   // updated() {
   //   this.get1();
@@ -78,7 +81,7 @@ export default {
   },
   methods: {
     get1() {
-      console.log(this.id);
+      // console.log(this.id);
       axios
         .get(
           `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`
@@ -139,11 +142,11 @@ export default {
       this.textyiguanzhu = "√已关注";
     },
   },
-  // computed:{
-  //   timeage(){   "timeage": Unknown word.
-  //   return time.ago(new Date(this.one.time).valueOf());
-  //   }
-  // }
+  computed: {
+    timeage() {
+      return time.ago(new Date(this.articleTime).valueOf());
+    },
+  },
 };
 </script>
 

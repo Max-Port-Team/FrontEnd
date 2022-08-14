@@ -2,7 +2,7 @@
   <div>
     <!-- <button @click="sendId">sendid</button> -->
     <main class="ArticleMain">
-      <ArticleHead />
+      <ArticleHead :id="$route.query.id" />
       <ArticleBody :body="body" />
     </main>
   </div>
@@ -36,13 +36,13 @@ export default {
         this.others = res;
         this.body = res.body;
       });
-    // this.sendId();
+    this.sendId();
   },
   methods: {
-    // sendId() {
-    //   this.$bus.$emit("getId", this.id);
-    //   console.log(this.id);
-    // },
+    sendId() {
+      this.$bus.$emit("getId", this.id);
+      console.log(this.id);
+    },
   },
 };
 </script>
