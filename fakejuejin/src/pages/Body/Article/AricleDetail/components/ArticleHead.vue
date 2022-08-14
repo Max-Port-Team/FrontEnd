@@ -35,6 +35,7 @@
 
 <script>
 import axios from "axios";
+// import time from "time.js";
 import { nextTick } from "vue";
 
 export default {
@@ -46,21 +47,22 @@ export default {
       textyiguanzhu: "√已关注",
       isFollow: false,
       guanzhustyle: "",
-      id: "",
       articleTime: "2022年07月22日 17:06",
       body: "",
       visit: "",
       authorName: "掘金酱",
     };
   },
+  props: ["id"],
   created: function () {
     console.log();
   },
   mounted() {
-    this.$bus.$on("getId", (data) => {
-      console.log("我是atriclehead组件，收到了数据", data);
-      this.id = data;
-    });
+    // this.$bus.$on("getId", (data) => {
+    //   console.log("我是atriclehead组件，收到了数据", data);
+    //   this.id = data;
+    // });
+
     // .finally(() => this.get1());
     // nextTick(() => this.get1);
     this.get1();
@@ -76,6 +78,7 @@ export default {
   },
   methods: {
     get1() {
+      console.log(this.id);
       axios
         .get(
           `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`
@@ -136,6 +139,11 @@ export default {
       this.textyiguanzhu = "√已关注";
     },
   },
+  // computed:{
+  //   timeage(){   "timeage": Unknown word.
+  //   return time.ago(new Date(this.one.time).valueOf());
+  //   }
+  // }
 };
 </script>
 
