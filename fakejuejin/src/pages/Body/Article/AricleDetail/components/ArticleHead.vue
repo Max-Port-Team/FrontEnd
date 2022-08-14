@@ -157,7 +157,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .articlehead {
   overflow: hidden;
   padding-top: 20px;
@@ -183,6 +183,9 @@ export default {
   width: 52px;
   height: 51px;
   margin-right: 8px;
+}
+.articlehead .photo img {
+  border-radius: 50%;
 }
 .articlehead .lv {
   float: left;
