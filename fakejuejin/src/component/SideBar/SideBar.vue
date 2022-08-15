@@ -1,25 +1,30 @@
 <template>
-  <div class="SiderBarContainer">SideBar</div>
+  <div class="SideBarContainer">
+    <SignIn></SignIn>
+    <Advertisement></Advertisement>
+    <DownLoad></DownLoad>
+  </div>
 </template>
 
 <script>
-import UserSidebar from "../../pages/User/components/UserSidebar.vue";
+import SignIn from "./components/SignIn.vue";
+import Advertisement from "./components/Advertisement.vue";
+import DownLoad from "./components/DownLoad.vue";
+
 export default {
   name: "SideBar",
-  components: { UserSidebar },
-  data() {
-    return {};
+  components: {
+    Advertisement,
+    DownLoad,
+    SignIn,
   },
-  methods: {},
 };
 </script>
 
 <style scoped>
-.SiderBarContainer {
-  width: 250px;
-  height: 500px;
+.SideBarContainer {
+  width: 240px;
+  height: 640px;
   top: 0;
-
-  border: 1px solid black;
 }
 </style>

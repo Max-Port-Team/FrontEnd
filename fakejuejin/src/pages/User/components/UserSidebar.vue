@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="UserSidebar">
     <!-- 上层布局 -->
     <div class="achieve">
       <h3>个人成就</h3>
@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.UserSidebar {
+  width: 250px;
+}
 .achieve {
   height: 200px;
   width: 100%;
@@ -77,6 +80,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .achieve h3 {
   padding: 12px;
   border-bottom: 1px solid lightgray;

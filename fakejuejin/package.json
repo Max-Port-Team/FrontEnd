@@ -8,24 +8,26 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.24.1",
+    "axios": "^0.27.2",
+    "core-js": "^3.8.3",
+    "dayjs": "^1.11.5",
     "marked": "^4.0.18",
     "micromarkdown": "^0.3.4-a",
     "posthtml": "^0.16.6",
     "posthtml-prism": "^1.0.4",
     "time.js": "^0.0.1",
-    "vue": "^2.7.8",
+    "vue": "^2.6.14",
     "vue-router": "^3.5.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.10",
-    "@babel/eslint-parser": "^7.18.9",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.7.1",
-    "vue-template-compiler": "^2.7.8"
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
@@ -37,7 +39,8 @@
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "@babel/eslint-parser"
+      "parser": "@babel/eslint-parser",
+      "requireConfigFile": false
     },
     "rules": {}
   },
