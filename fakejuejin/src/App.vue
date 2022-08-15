@@ -26,8 +26,9 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route(from,to) {
       this.keybody=Math.random()
+      this.$refs.AppMain.style.width='980px'
     },
   },
   components: {
@@ -36,9 +37,6 @@ export default {
   mounted(){
     if(this.$route.path=='/articledetail'){
         this.$refs.AppMain.style.width='1180px'
-    }
-    if(this.$route.path=='/'){
-        this.$refs.AppMain.style.width='980px'
     }
   }
 }

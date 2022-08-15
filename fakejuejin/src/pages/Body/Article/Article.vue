@@ -1,7 +1,7 @@
 <template>
   <div class="ArticleContainer" @click="Articledetail">
     <header class="article-header">
-      <span id="article-name">{{one.authorName}}</span>
+      <span id="article-name">{{one.authorName?one.authorName:nickName}}</span>
       <span id="article-timeage">{{ timeage }}</span>
       <span id="article-tag">{{ one.tag }}</span>
     </header>
@@ -24,7 +24,7 @@ export default {
     return {
     };
   },
-  props: ["one"],
+  props: ["one","nickName"],
   methods:{
     strSplit(){
       if(this.appear){

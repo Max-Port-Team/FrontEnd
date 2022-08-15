@@ -30,7 +30,7 @@ export default new VueRouter({
     },
     {
         name: "user",
-        path: "/user/:userName",
+        path: "/user/:userId",
         components: {
             default: User,
             SideBar: UserSideBar,
