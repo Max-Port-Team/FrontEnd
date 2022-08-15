@@ -299,6 +299,7 @@ export default {
   background-color: white;
 }
 .FakeArticle {
+  padding: 30px;
   width: 100%;
   height: 155px;
 }
