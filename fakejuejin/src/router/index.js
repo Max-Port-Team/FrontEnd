@@ -5,6 +5,7 @@ import SideBar from "../component/SideBar/SideBar.vue";
 import ArticleSideBar from "../component/SideBar/ArticleSideBar.vue";
 import User from '../pages/User/User.vue'
 import UserBody from '../pages/User/pages/UserBody.vue'
+import UserSideBar from '../pages/User/components/UserSidebar.vue'
 export default new VueRouter({
     routes: [{
         path: "/",
@@ -29,10 +30,10 @@ export default new VueRouter({
     },
     {
         name: "user",
-        path: "/user",
+        path: "/user/:userName",
         components: {
             default: User,
-            SideBar: ArticleSideBar,
+            SideBar: UserSideBar,
         },
         children:[
             {
