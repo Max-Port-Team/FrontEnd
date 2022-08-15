@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <main class="AppMain" ref='AppMain'>
-      <router-view></router-view>
+      <router-view :key="keybody"></router-view>
       <router-view name="SideBar"></router-view>
     </main>
     <footer class="AppFooter">
@@ -20,6 +20,16 @@ import RollUp from './component/RollUp.vue'
 import Body from './pages/Body/Body.vue'
 export default {
   name: 'App',
+  data() {
+    return {
+      keybody:1
+    }
+  },
+  watch: {
+    $route() {
+      this.keybody=Math.random()
+    },
+  },
   components: {
     Header, SideBar,RollUp,FeedBack,Body
   },

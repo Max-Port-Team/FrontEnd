@@ -7,7 +7,11 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="(node,key) in ArticleList" :key="key" :one="node" ></Article>
+    <Article
+      v-for="(node, key) in ArticleList"
+      :key="key"
+      :one="node"
+    ></Article>
   </div>
 </template>
 
@@ -19,48 +23,75 @@ export default {
   data() {
     return {
       ArticleList: [],
-      scrollHeight:0,
-      pageYOffset:0
+      scrollHeight: 0,
+      pageYOffset: 0,
+      params: this.$route.params.tag,
     };
   },
-  methods:{
-    finiteScroll(){
-      let {scrollHeight,pageYOffset}=this;
-      if(scrollHeight-pageYOffset<this.clientHeight+800){
-          fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle").then((res)=>{
-           return res.json()
-          },(err)=>{console.log(err)}).then((res)=>{
-            this.ArticleList=[...this.ArticleList,...res]
-          },(err)=>{console.log(err)})
+
+  methods: {
+    finiteScroll() {
+      let { scrollHeight, pageYOffset } = this;
+      if (scrollHeight - pageYOffset < this.clientHeight + 800) {
+        fetch(
+          `http://43.156.106.129/api/MaxPort/article/${
+            this.$route.params.tag
+              ? `queryAllArticleByTag?tag=${this.$route.params.tag}`
+              : "queryAllArticle"
+          }`
+        )
+          .then(
+            (res) => {
+              return res.json();
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+          .then(
+            (res) => {
+              this.ArticleList = [...this.ArticleList, ...res];
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
       }
     },
-    throttle(fnc,time){
-        let flag=true
-        return ()=>{
-          if(flag){
-            flag=false
-            fnc()
-            setTimeout(()=>{flag=true},time)
-          }
+    throttle(fnc, time) {
+      let flag = true;
+      return () => {
+        if (flag) {
+          flag = false;
+          fnc();
+          setTimeout(() => {
+            flag = true;
+          }, time);
         }
-    }
-   },
-  computed:{
-    clientHeight(){
-      return document.documentElement.clientHeight
-    }
-  }
-  ,
+      };
+    },
+  },
+  computed: {
+    clientHeight() {
+      return document.documentElement.clientHeight;
+    },
+  },
   mounted() {
-    fetch(`http://43.156.106.129/api/MaxPort/article/${this.$route.params.tag?`queryAllArticleByTag?tag=${this.$route.params.tag}`:'queryAllArticle'}`)
+    fetch(
+      `http://43.156.106.129/api/MaxPort/article/${
+        this.$route.params.tag
+          ? `queryAllArticleByTag?tag=${this.$route.params.tag}`
+          : "queryAllArticle"
+      }`
+    )
       .then((res) => {
         return res.json();
       })
       .then((res) => {
         this.ArticleList = res;
         this.$refs.FakeArticle.style.display = "none";
-      });      
-    let throttleFiniteScroll=this.throttle(this.finiteScroll,1000)
+      });
+    let throttleFiniteScroll = this.throttle(this.finiteScroll, 1000);
     document.addEventListener("scroll", () => {
       this.scrollHeight = Math.max(
         document.body.scrollHeight,
@@ -70,10 +101,9 @@ export default {
         document.body.clientHeight,
         document.documentElement.clientHeight
       );
-      this.pageYOffset=window.pageYOffset;
-      throttleFiniteScroll()
+      this.pageYOffset = window.pageYOffset;
+      throttleFiniteScroll();
     });
-   
   },
 };
 </script>
