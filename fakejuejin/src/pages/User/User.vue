@@ -1,16 +1,15 @@
 <template>
   <div class="user-container">
-    <UserHeader/>
+    <UserHeader />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import UserHeader from "./components/UserHeader.vue"
+import UserHeader from "./components/UserHeader.vue";
 export default {
-  name:"User",
-  components:{UserHeader}
-
+  name: "User",
+  components: { UserHeader },
 };
 </script>
 
