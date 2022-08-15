@@ -38,10 +38,7 @@
 </template>
 
 <script>
-import axios from "axios";
 import time from "time.js";
-// import { nextTick } from "vue";
-
 export default {
   name: "ArticleHead",
   data() {
@@ -61,46 +58,28 @@ export default {
 
   props: ["id"],
   created: function () {
-    console.log();
   },
   mounted() {
-    console.log(this.id);
-    //   this.$bus.$on("getId", (data) => {
-    //     console.log("我是atriclehead组件，收到了数据", data);
-    //     this.id = data;
-    //   });
     this.get1();
-    //   // .finally(() => this.get1());
-    //   // nextTick(() => this.get1);
-    //   // this.$nextTick(this.get1());
-  },
-  // updated() {
-  //   this.get1();
-  // },
-  // beforeUpdate() {
-  //   this.get1();
-  // },
-  beforeDestroy() {
-    this.$bus.$off("hello");
+    
   },
   methods: {
     get1() {
-      // console.log(this.id);
-      axios
-        .get(
+      fetch(
           `http://43.156.106.129/api/MaxPort/article/queryArticleByArticleId?articleId=${this.id}`
           // "http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=7"
         )
+        .then((res)=>res.json())
         .then(
           (response) => {
-            // console.log("请求成功了", response.data);
+            // console.log("请求成功了", response);
             this.articleTime = time(
-              new Date(response.data[0].time),
+              new Date(response[0].time),
               "%y年%M月%d日 %h:%m"
             );
-            this.articletitle = response.data[0].title;
-            this.visit = response.data[0].visit;
-            this.authorName = response.data[0].authorName;
+            this.articletitle = response[0].title;
+            this.visit = response[0].visit;
+            this.authorName = response[0].authorName;
           },
           (error) => {
             console.log("请求失败了", error.message);
@@ -108,17 +87,7 @@ export default {
         );
     },
     change1() {
-      console.log(this.id);
-      // if ((this.isFollow = false)) {
-      //   this.isFollow = true;
-      // } else {
-      //   this.isFollow = false;
-      // }
-      // console.log(this.isFollow);
       this.isFollow = !this.isFollow;
-      // this.guanzhucolor = "#515767";
-      // this.guanzhubackground = "rgba(81,87,103,.05)";
-      // this.guanzhubordercolor = "rgba(81,87,103,.3)";
       if (this.isFollow == true) {
         this.guanzhustyle =
           "color:#515767; background:rgba(81,87,103,.05); bordercolor:rgba(81,87,103,.3)";
@@ -126,26 +95,14 @@ export default {
         this.guanzhustyle =
           "color:#1e80ff; background:rgba(30,128,255,0.05); bordercolor:rgba(30,128,255,0.3)";
       }
-      // console.log(this.isFollow);
-      // console.log(this.time);
     },
     // 移入
     mouseOver() {
-      // this.active = "background-color:black";
-      // // 操作dom 获取p标签改变其样式
-      // var acps = this.$refs.acp;
-      // acps.style.color = "red";
+
       this.textyiguanzhu = "√取消关注";
     },
     // 移出
     mouseLeave() {
-      // this.active = "";
-      // this.$refs.acp.style = "";
-      // if (this.textyiguanzhu == "已关注") {
-      //   this.textyiguanzhu = "已关注";
-      // } else {
-      //   this.textyiguanzhu = "关注";
-      // }
       this.textyiguanzhu = "√已关注";
     },
   },
