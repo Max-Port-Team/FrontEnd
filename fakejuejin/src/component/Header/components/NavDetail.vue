@@ -22,26 +22,26 @@ export default {
 </script>
 
 <style scoped>
-#root {
-  width: 50%;
-  height: 40px;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  left: 22%;
-}
-a {
-  display: inline-block;
-  text-decoration: none;
-  text-decoration-line: none;
-  font-size: 15px;
-  color: #71777c;
-}
-a:hover {
-  color: #007fff;
-}
-.active {
-  color: #007fff;
-}
+    #root{
+        width: 50%;
+        height: 40px;
+        position: relative;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        left: 22%;
+    }
+    a {
+        display: inline-block;
+        text-decoration: none;
+        text-decoration-line: none;
+        font-size: 15px;
+        color: #71777c;
+    }
+    a:hover{
+        color: #007fff;
+    }
+    .active{
+        color: #007fff;
+    }
 </style>

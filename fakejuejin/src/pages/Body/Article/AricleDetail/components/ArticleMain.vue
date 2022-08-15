@@ -21,12 +21,6 @@ export default {
   },
   props: ["id"],
   components: { ArticleHead, ArticleBody },
-  created() {
-    // this.sendId();
-  },
-  // beforemount() {
-  //   this.sendId();
-  // },
   mounted() {
     fetch(
       `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.id}`
@@ -36,13 +30,6 @@ export default {
         this.others = res;
         this.body = res.body;
       });
-    this.sendId();
-  },
-  methods: {
-    sendId() {
-      this.$bus.$emit("getId", this.id);
-      console.log(this.id);
-    },
   },
 };
 </script>
