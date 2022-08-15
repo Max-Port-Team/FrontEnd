@@ -37,7 +37,12 @@ export default new VueRouter({
         },
         children:[
             {
-                path:'',
+                path:'/user/:userId/',
+                component:UserBody
+            }
+            ,
+            {
+                path:'/user/:userId/:type',
                 component:UserBody
             }
         ]
