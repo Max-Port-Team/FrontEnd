@@ -4,10 +4,12 @@
     <main class="AppMain" ref='AppMain'>
       <router-view></router-view>
       <router-view name="SideBar"></router-view>
+      <router-view name="LogIn"></router-view>
     </main>
     <footer class="AppFooter">
       <RollUp />
       <FeedBack />
+      <LogIn></LogIn>
     </footer>
   </div>
 </template>
@@ -21,8 +23,12 @@ import Body from './pages/Body/Body.vue'
 export default {
   name: 'App',
   components: {
-    Header, SideBar,RollUp,FeedBack,Body
-  },
+    Header,
+    SideBar,
+    RollUp,
+    FeedBack,
+    Body,
+},
   mounted(){
     if(this.$route.path=='/articledetail'){
         this.$refs.AppMain.style.width='1180px'
