@@ -11,14 +11,15 @@
           <div class="navitem" ref="navitems">{{ one }}</div>
         </router-link>
       </nav>
+      <div class="nax-sreach"><i class="iconfont icon-search"></i></div>
     </div>
     <div class="userbody-body">
-        <div class="FakeArticle" ref="FakeArticle">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>      
+      <div class="FakeArticle" ref="FakeArticle">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <Article
         v-for="(node, key) in articlelist"
         :key="key"
@@ -43,7 +44,7 @@ export default {
   },
   data() {
     return {
-      navlist: ["动态", "文章", "专栏", "沸点", "收藏集", "关注", "赞🔻"],
+      navlist: ["动态", "文章", "专栏", "沸点", "收藏集", "关注", "赞 ▼"],
       articlelist: [],
       nickName: "",
     };
@@ -68,6 +69,31 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "iconfont"; /* Project id 3448432 */
+  src: url("//at.alicdn.com/t/c/font_3448432_laaxwvkgh3.woff2?t=1660613596274")
+      format("woff2"),
+    url("//at.alicdn.com/t/c/font_3448432_laaxwvkgh3.woff?t=1660613596274")
+      format("woff"),
+    url("//at.alicdn.com/t/c/font_3448432_laaxwvkgh3.ttf?t=1660613596274")
+      format("truetype");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xiajiantou:before {
+  content: "\eb6d";
+}
+
+.icon-search:before {
+  content: "\e7b3";
+}
 .userbody-container {
   width: 100%;
   height: auto;
@@ -76,6 +102,7 @@ export default {
 }
 .userbody-header {
   width: 100%;
+  position: relative;
   border-bottom: 1px solid rgb(224, 224, 224);
 }
 .userbody-nav {
@@ -313,4 +340,13 @@ export default {
 .FakeArticle :nth-child(4) {
   width: 60%;
 }
+.nax-sreach{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.nax-sreach i{
+  font-size: 25px;
+}
+
 </style>

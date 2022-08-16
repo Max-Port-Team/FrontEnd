@@ -76,7 +76,7 @@ export default {
   height: 200px;
   width: 100%;
   background-color: white;
-
+  color: rgb(49, 68, 91);
   display: flex;
   flex-direction: column;
 }
@@ -116,7 +116,7 @@ export default {
   height: 70px;
   width: 100%;
   background-color: white;
-
+  color: rgb(49, 68, 91);
   display: flex;
   justify-content: space-evenly;
   align-content: center;
