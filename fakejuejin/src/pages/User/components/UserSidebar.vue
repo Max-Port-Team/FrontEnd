@@ -49,20 +49,31 @@ export default {
   data() {
     return {
       items: {
-        star: 999,
-        read: 4312,
-        value: 12312,
+        star: Math.floor(Math.random() * 100),
+        read: null,
+        value: Math.floor(Math.random() * 100),
       },
       middle: {
-        follow: 39129,
-        follower: "100w",
+        follow: Math.floor(Math.random() * 100),
+        follower: Math.floor(Math.random() * 100),
       },
       bottom: {
-        collection: 43,
-        tags: 2,
-        joinin: "2022-2-14",
+        collection: Math.floor(Math.random() * 100),
+        tags: Math.floor(Math.random() * 10),
+        joinin: "2020-7-24",
       },
     };
+  },
+  mounted() {
+    fetch(
+      "http://43.156.106.129/api/MaxPort/people/get-sum-visit-by-id?id=" +
+        this.$route.params.userId
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        this.items.read = res.visit;
+      });
   },
   methods: {},
 };
