@@ -1,5 +1,5 @@
 <template>
-  <div class="ArticleContainer" @click="Articledetail">
+  <div class="ArticleContainer" @click="Articledetail" @mousedown="prevent($event)">
     <header class="article-header">
       <span id="article-name">{{one.authorName?one.authorName:nickName}}</span>
       <span id="article-timeage">{{ timeage }}</span>
@@ -26,6 +26,10 @@ export default {
   },
   props: ["one","nickName"],
   methods:{
+    prevent(e){
+      e.preventDefault();
+      
+    },
     strSplit(){
       if(this.appear){
         return this.one.intro.slice(0,30) + "..."
@@ -64,7 +68,7 @@ export default {
   border-bottom: 1px solid rgb(165, 164, 164);
 }
 .ArticleContainer:hover{
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(250, 250, 250);
 }
 .article-header {
   height: 20px;

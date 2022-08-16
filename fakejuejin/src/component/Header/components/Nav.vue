@@ -88,12 +88,15 @@ export default {
 }
 .logo-img {
   margin-right: 1rem;
-  margin-left: 24px;
+  margin-left: 20px;
+  margin-top: 6px;
   display: inline-block;
   height: 28px;
   width: auto;
 }
 .logo-img img {
+  height: 22px;
+  width: 107px;
   display: block;
 }
 .nav-list {
@@ -106,8 +109,9 @@ export default {
   list-style: none;
 }
 .nav-router-list {
-  width: 100%;
+  width: 75%;
   height: 40px;
+  font-size: 14px;
   position: relative;
   display: flex;
   justify-content: space-evenly;
