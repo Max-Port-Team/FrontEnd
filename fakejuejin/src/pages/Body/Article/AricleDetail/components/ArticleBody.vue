@@ -41,6 +41,7 @@ export default {
         clearInterval(timer);
         let html = marked.parse(this.body);
         this.$refs.ArticleBody.innerHTML = html.replace(/复制代码/g,"");
+        document.querySelectorAll('h1').forEach(v=>{v.style.marginBottom='40px';v.style.marginTop='40px'})
         document.querySelectorAll("pre").forEach((v) => (v.className = "language-javascript"));
         new Promise((resolve,reject)=>{
           this.loadScript("./index.js",resolve)
@@ -101,6 +102,10 @@ export default {
   border: 1px solid #b3d0ef;
   border-radius: 2px;
   cursor:default;
-
+}
+.aa{
+  margin-bottom:10px;
+  background-color: red !important;;
+  color: red;
 }
 </style>

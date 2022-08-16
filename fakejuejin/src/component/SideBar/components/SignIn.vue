@@ -1,5 +1,5 @@
 <template>
-<div class="signin">
+<div class="signin" ref="container">
     <div class="first-line">
         <div class="icon-text">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -26,95 +26,109 @@
 
 <script>
 export default {
-    name:'SignIn',
-    data() {
-        return {
-            msg: "点亮你在社区的每一天",
-            btnText: "去签到"
-        }
-    },
-    methods:{
-        getTimeState() {
-            // 获取当前时间
-            let timeNow = new Date();
-            // 获取当前小时
-            let hours = timeNow.getHours();
-            // 设置默认文字
-            let state = ``;
-            // 判断当前时间段
-            if (hours >= 0 && hours <= 10) {
-                state = `早上好!`;
-            } else if (hours > 10 && hours <= 14) {
-                state = `中午好!`;
-            } else if (hours > 14 && hours <= 18) {
-                state = `下午好!`;
-            } else if (hours > 18 && hours <= 24) {
-                state = `晚上好!`;
-            }
-            return state;
-        }
+  name:'SignIn',
+  data() {
+    return {
+      msg: "点亮你在社区的每一天",
+      btnText: "去签到"
     }
+  },
+  methods:{
+    getTimeState() {
+      // 获取当前时间
+      let timeNow = new Date();
+      // 获取当前小时
+      let hours = timeNow.getHours();
+      // 设置默认文字
+      let state = ``;
+      // 判断当前时间段
+      if (hours >= 0 && hours <= 10) {
+        state = `早上好!`;
+      } else if (hours > 10 && hours <= 14) {
+        state = `中午好!`;
+      } else if (hours > 14 && hours <= 18) {
+        state = `下午好!`;
+      } else if (hours > 18 && hours <= 24) {
+        state = `晚上好!`;
+      }
+      return state;
+    }
+  },
+  mounted() {
+    document.addEventListener("scroll", () => {
+      if (window.pageYOffset > 960) {
+        this.$refs.container.className = "signin2";
+      }
+      if (window.pageYOffset < 960) {
+        this.$refs.container.className = "signin";
+      }
+    });
+  }
 }
 </script>
 
 <style scoped>
 .signin {
-    width: 240px;
-    height: 96px;
-    margin-bottom: 16px;
-    padding: 16px;
-    background-color: #fff;
-    box-sizing: border-box;
+  width: 240px;
+  height: 96px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.signin2 {
+  display: none;
 }
 
 .first-line {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .icon-text {
-    display: flex;
+  display: flex;
 }
 
 .icon {
-    margin-right: 12px;
-    margin-top: 2px;
+  margin-right: 12px;
+  margin-top: 2px;
 }
 
 .title {
-    margin-top: 2px;
-    color: #1d2129;
-    font-size: 18px;
-    font-weight: 500;
+  margin-top: 2px;
+  color: #1d2129;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .signin-btn {
-    border: 1px solid #1e80ff;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    height: 32px;
-    width: 72px;
-    cursor: pointer;
+  border: 1px solid #1e80ff;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  height: 32px;
+  width: 72px;
+  cursor: pointer;
 }
 
 .btn-text {
-    color: #1e80ff;
-    font-size: 14px;
-    font-weight: 400;
-    white-space: nowrap;
+  color: #1e80ff;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
 }
 
 .second-line {
-    margin-bottom: 2px;
-    margin-left: 36px;
-    color: #4e5969;
-    font-size: 14px;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
+  margin-bottom: 2px;
+  margin-left: 36px;
+  color: #4e5969;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -7,52 +7,59 @@ import User from '../pages/User/User.vue'
 import UserBody from '../pages/User/pages/UserBody.vue'
 import UserSideBar from '../pages/User/components/UserSidebar.vue'
 import UserProfile from '../pages/User/components/UserProfile.vue'
+import LogIn from "../component/LogIn.vue";
+
 export default new VueRouter({
-    routes: [{
-        path: "/",
-        components: {
-            default: Body,
-            SideBar,
-        },
-        children: [
-            {
-                path: 'Tag/:tag',
-                component: Body
-            }
-        ]
-    },
+	routes: [
+		{
+			path: "/",
+			components: {
+				default: Body,
+				SideBar,
+			},
+			children: [
+				{
+					path: "Tag/:tag",
+					component: Body,
+				},
+			],
+		},
+		{
+			name: "articledetail",
+			path: "/articledetail",
+			components: {
+				default: ArticleDetail,
+				SideBar: ArticleSideBar,
+			},
+		},
     {
-        name: "articledetail",
-        path: "/articledetail",
-        components: {
-            default: ArticleDetail,
-            SideBar: ArticleSideBar,
-        },
+      name: "profile",
+      path: "/user/profile",
+      components: {default:UserProfile }
     },
-    {
-        name: "profile",
-        path: "/user/profile",
-        components: {default:UserProfile }
-    },
-    {
-        name: "user",
-        path: "/user/:userId",
-        components: {
-            default: User,
-            SideBar: UserSideBar,
-        },
-        children:[
-            {
-                path:'/user/:userId/',
-                component:UserBody
-            }
-            ,
-            {
-                path:'/user/:userId/:type',
-                component:UserBody
-            }
-        ]
-    },
-    ],
-    mode:'history'
+		{
+			name: "user",
+			path: "/user/:userId",
+			components: {
+				default: User,
+				SideBar: UserSideBar,
+			},
+			children: [
+				{
+					path: "/user/:userId/",
+					component: UserBody,
+				},
+				{
+					path: "/user/:userId/:type",
+					component: UserBody,
+				},
+			],
+		},
+		{
+			name: "LogIn",
+			path: "/login",
+			component: LogIn,
+		},
+	],
+  mode:'history'
 });

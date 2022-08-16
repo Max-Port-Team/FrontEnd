@@ -131,7 +131,7 @@ export default {
   background: #007fff;
   top: 100%;
   right: 50%;
-  transition: all 0.5s;
+  border-radius: 5px;
 }
 
 .nav-router-list > li a:hover::before {

@@ -6,7 +6,7 @@
     <div class="xiace">
       <!-- 左侧图片 -->
       <div class="photo">
-        <img src="../../../../../assets/11.webp" alt="hh" />
+        <img :src="this.avatar" alt="hh" />
       </div>
       <!-- 左侧文字 -->
       <div style="float: left">
@@ -53,6 +53,7 @@ export default {
       // id: "",
       visit: "",
       authorName: "", //掘金酱
+      avatar: "",
     };
   },
 
@@ -61,7 +62,7 @@ export default {
   },
   mounted() {
     this.get1();
-    
+
   },
   methods: {
     get1() {
@@ -80,6 +81,10 @@ export default {
             this.articletitle = response[0].title;
             this.visit = response[0].visit;
             this.authorName = response[0].authorName;
+            this.avatar = response[0].avatar;
+            if (this.avatar === null) {
+              this.avatar = require('../../../../../assets/5035712059_300x300.png')
+            }
           },
           (error) => {
             console.log("请求失败了", error.message);
