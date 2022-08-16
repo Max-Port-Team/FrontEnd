@@ -6,6 +6,7 @@ import ArticleSideBar from "../component/SideBar/ArticleSideBar.vue";
 import User from '../pages/User/User.vue'
 import UserBody from '../pages/User/pages/UserBody.vue'
 import UserSideBar from '../pages/User/components/UserSidebar.vue'
+import UserProfile from '../pages/User/components/UserProfile.vue'
 export default new VueRouter({
     routes: [{
         path: "/",
@@ -29,6 +30,11 @@ export default new VueRouter({
         },
     },
     {
+        name: "profile",
+        path: "/user/profile",
+        components: {default:UserProfile }
+    },
+    {
         name: "user",
         path: "/user/:userId",
         components: {
@@ -46,8 +52,7 @@ export default new VueRouter({
                 component:UserBody
             }
         ]
-            
-        
-      },
+    },
     ],
+    mode:'history'
 });

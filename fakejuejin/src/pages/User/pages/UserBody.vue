@@ -53,7 +53,12 @@ export default {
     fetch(
       `http://43.156.106.129/api/MaxPort/people/get-detailed-by-id?id=${this.$route.params.userId}`
     )
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status != 200) {
+          this.$router.replace("../404");
+        }
+        return res.json();
+      })
       .then((res) => {
         this.articlelist = res.articleArr;
         this.nickName = res.nickname;
@@ -340,13 +345,12 @@ export default {
 .FakeArticle :nth-child(4) {
   width: 60%;
 }
-.nax-sreach{
+.nax-sreach {
   position: absolute;
   right: 10px;
   top: 10px;
 }
-.nax-sreach i{
+.nax-sreach i {
   font-size: 25px;
 }
-
 </style>
