@@ -3,10 +3,11 @@ import Body from "../pages/Body/Body.vue";
 import ArticleDetail from "../pages/Body/Article/AricleDetail/ArticleDetail.vue";
 import SideBar from "../component/SideBar/SideBar.vue";
 import ArticleSideBar from "../component/SideBar/ArticleSideBar.vue";
+import User from '../pages/User/User.vue'
+import UserBody from '../pages/User/pages/UserBody.vue'
+import UserSideBar from '../pages/User/components/UserSidebar.vue'
+import UserProfile from '../pages/User/components/UserProfile.vue'
 import LogIn from "../component/LogIn.vue";
-import User from "../pages/User/User.vue";
-import UserBody from "../pages/User/pages/UserBody.vue";
-import UserSideBar from "../pages/User/components/UserSidebar.vue";
 
 export default new VueRouter({
 	routes: [
@@ -31,6 +32,11 @@ export default new VueRouter({
 				SideBar: ArticleSideBar,
 			},
 		},
+    {
+      name: "profile",
+      path: "/user/profile",
+      components: {default:UserProfile }
+    },
 		{
 			name: "user",
 			path: "/user/:userId",
@@ -55,4 +61,5 @@ export default new VueRouter({
 			component: LogIn,
 		},
 	],
+  mode:'history'
 });
