@@ -1,5 +1,5 @@
 <template>
-  <div class="SideBarContainer">
+  <div class="SideBarContainer" ref="container">
     <SignIn></SignIn>
     <Advertisement></Advertisement>
     <DownLoad></DownLoad>
@@ -18,13 +18,32 @@ export default {
     DownLoad,
     SignIn,
   },
+  mounted() {
+    document.addEventListener("scroll", () => {
+      if (window.pageYOffset > 960) {
+        this.$refs.container.className = "SideBarContainer2";
+      }
+      if (window.pageYOffset < 960) {
+        this.$refs.container.className = "SideBarContainer";
+      }
+    });
+  }
 };
 </script>
 
 <style scoped>
+
 .SideBarContainer {
   width: 240px;
   height: 640px;
   top: 0;
+}
+.SideBarContainer2 {
+  position: fixed;
+  width: 240px;
+  height: 640px;
+  margin-left: 740px;
+  top: 20px;
+  z-index: 1000;
 }
 </style>
