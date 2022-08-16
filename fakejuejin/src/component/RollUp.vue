@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "FeedBack",
+  name: "RollUp",
   methods:{
     goBack(){
         document.scrollingElement.scrollTop = 0;

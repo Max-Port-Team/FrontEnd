@@ -4,6 +4,9 @@ import ArticleDetail from "../pages/Body/Article/AricleDetail/ArticleDetail.vue"
 import SideBar from "../component/SideBar/SideBar.vue";
 import ArticleSideBar from "../component/SideBar/ArticleSideBar.vue";
 import LogIn from "../component/LogIn.vue";
+import User from "../pages/User/User.vue";
+import UserBody from "../pages/User/pages/UserBody.vue";
+import UserSideBar from "../pages/User/components/UserSidebar.vue";
 
 export default new VueRouter({
 	routes: [
@@ -16,6 +19,7 @@ export default new VueRouter({
 			children: [
 				{
 					path: "Tag/:tag",
+					component: Body,
 				},
 			],
 		},
@@ -28,8 +32,26 @@ export default new VueRouter({
 			},
 		},
 		{
+			name: "user",
+			path: "/user/:userId",
+			components: {
+				default: User,
+				SideBar: UserSideBar,
+			},
+			children: [
+				{
+					path: "/user/:userId/",
+					component: UserBody,
+				},
+				{
+					path: "/user/:userId/:type",
+					component: UserBody,
+				},
+			],
+		},
+		{
 			name: "LogIn",
-			path: "/logIn",
+			path: "/login",
 			component: LogIn,
 		},
 	],

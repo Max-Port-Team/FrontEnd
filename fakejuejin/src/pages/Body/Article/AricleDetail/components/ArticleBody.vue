@@ -41,7 +41,7 @@ export default {
         clearInterval(timer);
         let html = marked.parse(this.body);
         this.$refs.ArticleBody.innerHTML = html.replace(/复制代码/g,"");
-        document.querySelectorAll("pre").forEach((v) => (v.className = "language-css"));
+        document.querySelectorAll("pre").forEach((v) => (v.className = "language-javascript"));
         new Promise((resolve,reject)=>{
           this.loadScript("./index.js",resolve)
         })

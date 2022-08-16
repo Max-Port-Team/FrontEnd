@@ -7,7 +7,11 @@
       <div></div>
       <div></div>
     </div>
-    <Article v-for="(node,key) in ArticleList" :key="key" :one="node"></Article>
+    <Article
+      v-for="(node, key) in ArticleList"
+      :key="key"
+      :one="node"
+    ></Article>
   </div>
 </template>
 
@@ -19,40 +23,67 @@ export default {
   data() {
     return {
       ArticleList: [],
-      scrollHeight:0,
-      pageYOffset:0
+      scrollHeight: 0,
+      pageYOffset: 0,
+      params: this.$route.params.tag,
     };
   },
-  methods:{
-    finiteScroll(){
-      let {scrollHeight,pageYOffset}=this;
-      if(scrollHeight-pageYOffset<this.clientHeight+800){
-          fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle").then((res)=>{
-           return res.json()
-          },(err)=>{console.log(err)}).then((res)=>{
-            this.ArticleList=[...this.ArticleList,...res]
-          },(err)=>{console.log(err)})
+
+  methods: {
+    finiteScroll() {
+      let { scrollHeight, pageYOffset } = this;
+      if (scrollHeight - pageYOffset < this.clientHeight + 800) {
+        fetch(
+          `http://43.156.106.129/api/MaxPort/article/${
+            this.$route.params.tag
+              ? `queryAllArticleByTag?tag=${this.$route.params.tag}`
+              : "queryAllArticle"
+          }`
+        )
+          .then(
+            (res) => {
+              return res.json();
+            },
+            (err) => {
+              console.log(err);
+            }
+          )
+          .then(
+            (res) => {
+              this.ArticleList = [...this.ArticleList, ...res];
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
       }
     },
-    throttle(fnc,time){
-        let flag=true
-        return ()=>{
-          if(flag){
-            flag=false
-            fnc()
-            setTimeout(()=>{flag=true},time)
-          }
+    throttle(fnc, time) {
+      let flag = true;
+      return () => {
+        if (flag) {
+          flag = false;
+          fnc();
+          setTimeout(() => {
+            flag = true;
+          }, time);
         }
-    }
-   },
-  computed:{
-    clientHeight(){
-      return document.documentElement.clientHeight
-    }
-  }
-  ,
+      };
+    },
+  },
+  computed: {
+    clientHeight() {
+      return document.documentElement.clientHeight;
+    },
+  },
   mounted() {
-    fetch("http://43.156.106.129/api/MaxPort/article/queryAllArticle")
+    fetch(
+      `http://43.156.106.129/api/MaxPort/article/${
+        this.$route.params.tag
+          ? `queryAllArticleByTag?tag=${this.$route.params.tag}`
+          : "queryAllArticle"
+      }`
+    )
       .then((res) => {
         return res.json();
       })
@@ -60,8 +91,8 @@ export default {
         this.ArticleList = res;
         this.$refs.FakeArticle.style.display = "none";
       });
-   let throttleFiniteScroll=this.throttle(this.finiteScroll,1000)
-   document.addEventListener("scroll", () => {
+    let throttleFiniteScroll = this.throttle(this.finiteScroll, 1000);
+    document.addEventListener("scroll", () => {
       this.scrollHeight = Math.max(
         document.body.scrollHeight,
         document.documentElement.scrollHeight,
@@ -70,8 +101,8 @@ export default {
         document.body.clientHeight,
         document.documentElement.clientHeight
       );
-      this.pageYOffset=window.pageYOffset;
-      throttleFiniteScroll()
+      this.pageYOffset = window.pageYOffset;
+      throttleFiniteScroll();
     });
   },
 };
@@ -242,7 +273,7 @@ export default {
       rgb(230, 230, 230)
     );
   }
-  90% {
+  100% {
     background: linear-gradient(
       to right,
       white,
@@ -261,12 +292,14 @@ export default {
 }
 .BodyContainer {
   display: inline-block;
+  padding-top: 20px;
   cursor: pointer;
   width: 700px;
   height: auto;
   background-color: white;
 }
 .FakeArticle {
+  padding: 30px;
   width: 100%;
   height: 155px;
 }
