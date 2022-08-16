@@ -10,7 +10,7 @@
         <a
           @click="jump(one.id)"
           :style="`textIndent:${(one.getAttribute('h') * 1 - maxH) * 30}px`"
-          >{{ one.innerHTML }}</a
+          >{{ one.innerText }}</a
         >
       </li>
     </ul>
@@ -77,7 +77,7 @@ export default {
           this.catalogList.forEach((v, key) => {
             if (
               v.offsetTop+70 <= window.pageYOffset &&
-              this.catalogList[key + 1].offsetTop+125 >= window.pageYOffset
+              this.catalogList[key + 1]?.offsetTop+125 >= window.pageYOffset
             ) {
               lis.forEach((v)=>{v.classList.remove('catalog-liborder')})
                 lis[key].classList.add('catalog-liborder')
