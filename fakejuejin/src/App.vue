@@ -9,7 +9,7 @@
     <footer class="AppFooter">
       <RollUp />
       <FeedBack />
-      <LogIn></LogIn>
+      <!-- <LogIn></LogIn> -->
     </footer>
   </div>
 </template>
@@ -20,6 +20,7 @@ import SideBar from "./component/SideBar/SideBar.vue";
 import FeedBack from "./component/FeedBack.vue";
 import RollUp from "./component/RollUp.vue";
 import Body from "./pages/Body/Body.vue";
+import LogIn from './component/LogIn.vue'
 export default {
   name: "App",
   data() {
@@ -39,6 +40,7 @@ export default {
     RollUp,
     FeedBack,
     Body,
+    LogIn
   },
   mounted() {
     if (this.$route.path == "/articledetail") {

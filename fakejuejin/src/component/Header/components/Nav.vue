@@ -170,5 +170,6 @@ export default {
   margin-right: 20px;
   height: 42px;
   cursor: pointer;
+  white-space: nowrap;
 }
 </style>
