@@ -36,7 +36,7 @@ export default {
     SideBar,
     RollUp,
     FeedBack,
-    Body,
+    Body
   },
   mounted() {
     if (this.$route.path == "/articledetail") {

@@ -36,6 +36,7 @@ export default {
     }
     a {
         display: inline-block;
+        white-space: nowrap;
         height: 40px;
         line-height: 40px;
         margin-right: 25px;
