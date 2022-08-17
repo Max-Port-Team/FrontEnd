@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     toMainPage() {
-      this.$router.push("/user/" + window.localStorage.userName);
+      this.$router.push("/user/" + window.localStorage.userId);
     },
     logout() {
       fetch("http://43.156.106.129/api/MaxPort/people/logout", {
@@ -85,7 +85,7 @@ export default {
         //headers: { "Content-Type": "application/json" },
       }).finally(() => {
         window.localStorage.clear();
-        document.location.reload();
+        document.location.href = "/";
       });
     },
   },

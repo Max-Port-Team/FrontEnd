@@ -4,12 +4,10 @@
     <main class="AppMain" ref="AppMain">
       <router-view :key="keybody"></router-view>
       <router-view name="SideBar"></router-view>
-      <router-view name="LogIn"></router-view>
     </main>
     <footer class="AppFooter">
       <RollUp />
       <FeedBack />
-      <!-- <LogIn></LogIn> -->
     </footer>
   </div>
 </template>
@@ -20,7 +18,6 @@ import SideBar from "./component/SideBar/SideBar.vue";
 import FeedBack from "./component/FeedBack.vue";
 import RollUp from "./component/RollUp.vue";
 import Body from "./pages/Body/Body.vue";
-import LogIn from "./component/LogIn.vue";
 export default {
   name: "App",
   data() {
@@ -39,8 +36,7 @@ export default {
     SideBar,
     RollUp,
     FeedBack,
-    Body,
-    LogIn,
+    Body
   },
   mounted() {
     if (this.$route.path == "/articledetail") {
