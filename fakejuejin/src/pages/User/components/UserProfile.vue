@@ -136,10 +136,13 @@ export default {
       } else {
         fetch("http://43.156.106.129/api/MaxPort/people/put-user-info", {
           method: "PUT",
-          body: {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
             nickname: this.userName,
             password: SHA256(this.password).toString(),
-          },
+          }),
         })
           .catch((err) => {
             console.log(err);
@@ -157,6 +160,8 @@ export default {
             if (res.status) {
               alert("修改成功!");
               window.localStorage.setItem("userName", this.userName);
+            } else {
+              alert(res.errmsg);
             }
           });
       }
