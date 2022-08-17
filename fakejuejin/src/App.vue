@@ -4,12 +4,10 @@
     <main class="AppMain" ref="AppMain">
       <router-view :key="keybody"></router-view>
       <router-view name="SideBar"></router-view>
-      <router-view name="LogIn"></router-view>
     </main>
     <footer class="AppFooter">
       <RollUp />
       <FeedBack />
-      <LogIn></LogIn>
     </footer>
   </div>
 </template>
