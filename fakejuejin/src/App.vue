@@ -50,9 +50,6 @@ export default {
 </script>
 
 <style>
-.stopscroll{
-  overflow: hidden;
-}
 * {
   margin: 0;
   padding: 0;
@@ -108,5 +105,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.stopscroll{
+  overflow: hidden;
 }
 </style>
