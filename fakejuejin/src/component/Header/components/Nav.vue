@@ -20,11 +20,7 @@
       </li>
       <li>
         <div v-if="loggedIn">
-          <img
-            class="avatar"
-            src="../../../assets/5035712059_300x300.png"
-            alt=""
-          />
+          <img class="avatar" :src="avatarPath" alt="" />
           <NavMenu v-show="showMenu" />
         </div>
         <button v-else class="login-button" @click="showLoginFrame = true">
@@ -60,6 +56,12 @@ export default {
     loggedIn() {
       if (window.localStorage.getItem("userName")) return 1;
       else return 0;
+    },
+    avatarPath() {
+      return (
+        window.localStorage.getItem("avatar") ||
+        "../../../assets/5035712059_300x300.png"
+      );
     },
   },
   methods: {
