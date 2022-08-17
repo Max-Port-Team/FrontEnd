@@ -20,21 +20,21 @@
       </li>
       <li>
         <div v-if="loggedIn">
-          <img
-            class="avatar"
-            src="../../../assets/5035712059_300x300.png"
-            alt=""
-          />
+          <img class="avatar" :src="avatarPath" alt="" />
           <NavMenu v-show="showMenu" />
         </div>
-        <button v-else class="login-button">登录</button>
+        <button v-else class="login-button" @click="showLoginFrame = true">
+          登录
+        </button>
       </li>
     </ul>
+    <LogIn v-if="showLoginFrame" />
   </div>
 </template>
 
 <script>
 import NavMenu from "./NavMenu.vue";
+import LogIn from "../../LogIn.vue";
 export default {
   data() {
     return {
@@ -49,12 +49,19 @@ export default {
         // { id: 7, name: "插件", path: "/" },
       ],
       showMenu: false,
+      showLoginFrame: false,
     };
   },
   computed: {
     loggedIn() {
       if (window.localStorage.getItem("userName")) return 1;
       else return 0;
+    },
+    avatarPath() {
+      return (
+        window.localStorage.getItem("avatar") ||
+        "../../../assets/5035712059_300x300.png"
+      );
     },
   },
   methods: {
@@ -70,7 +77,7 @@ export default {
       }
     },
   },
-  components: { NavMenu },
+  components: { NavMenu, LogIn },
 };
 </script>
 
