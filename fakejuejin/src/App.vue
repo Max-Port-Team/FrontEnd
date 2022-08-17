@@ -20,7 +20,7 @@ import SideBar from "./component/SideBar/SideBar.vue";
 import FeedBack from "./component/FeedBack.vue";
 import RollUp from "./component/RollUp.vue";
 import Body from "./pages/Body/Body.vue";
-import LogIn from './component/LogIn.vue'
+import LogIn from "./component/LogIn.vue";
 export default {
   name: "App",
   data() {
@@ -40,7 +40,7 @@ export default {
     RollUp,
     FeedBack,
     Body,
-    LogIn
+    LogIn,
   },
   mounted() {
     if (this.$route.path == "/articledetail") {
