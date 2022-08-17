@@ -122,6 +122,12 @@ export default {
       e.target.focus();
     },
   },
+  mounted(){
+    document.querySelector('body').classList.add('stopscroll')
+  },
+  beforeDestroy(){
+    document.querySelector('body').classList.remove('stopscroll')
+  }
 };
 </script>
 

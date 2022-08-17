@@ -50,6 +50,9 @@ export default {
 </script>
 
 <style>
+.stopscroll{
+  overflow: hidden;
+}
 * {
   margin: 0;
   padding: 0;
