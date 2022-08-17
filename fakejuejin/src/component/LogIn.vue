@@ -15,6 +15,7 @@
               maxlength="20"
               required
               v-model="userName"
+              @click="inputFocus"
             />
           </div>
           <div class="input-box">
@@ -27,6 +28,7 @@
               maxlength="20"
               required
               v-model="password"
+              @click="inputFocus"
             />
           </div>
         </div>
@@ -116,6 +118,9 @@ export default {
           });
       }
     },
+    inputFocus(e) {
+      e.target.focus();
+    },
   },
 };
 </script>
@@ -175,6 +180,7 @@ a {
   border-radius: 2px;
   outline: none;
   box-sizing: border-box;
+  user-select: all !important;
 }
 
 .btn {

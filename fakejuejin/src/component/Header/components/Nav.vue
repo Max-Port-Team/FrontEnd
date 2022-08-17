@@ -27,14 +27,18 @@
           />
           <NavMenu v-show="showMenu" />
         </div>
-        <button v-else class="login-button">登录</button>
+        <button v-else class="login-button" @click="showLoginFrame = true">
+          登录
+        </button>
       </li>
     </ul>
+    <LogIn v-if="showLoginFrame" />
   </div>
 </template>
 
 <script>
 import NavMenu from "./NavMenu.vue";
+import LogIn from "../../LogIn.vue";
 export default {
   data() {
     return {
@@ -49,6 +53,7 @@ export default {
         // { id: 7, name: "插件", path: "/" },
       ],
       showMenu: false,
+      showLoginFrame: false,
     };
   },
   computed: {
@@ -70,7 +75,7 @@ export default {
       }
     },
   },
-  components: { NavMenu },
+  components: { NavMenu, LogIn },
 };
 </script>
 
