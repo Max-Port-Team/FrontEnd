@@ -132,7 +132,8 @@
                 />
                 <button class="btn" @click="submit('avatar')">提交</button>
                 <div class="description">
-                  支持jpg、png、jpeg格式大小5M以内的图片链接
+                  支持jpg、png、jpeg格式大小5M以内的图片链接<br /><br />
+                  声明：直接使用用户提交的图片网址是非常危险的行为，此处仅为演示功能用，实际开发中不会如此设计
                 </div>
               </div>
             </div>
@@ -446,7 +447,7 @@ svg:not(:root) {
   justify-content: center;
   align-items: center;
   width: 305px;
-  height: 64px;
+  height: 110px;
   flex-wrap: wrap;
   background-color: #f7f7f7;
   border-radius: 5px;
@@ -476,6 +477,7 @@ svg:not(:root) {
 }
 
 .inputAvatar .description {
+  padding: 10px;
   color: #86909c;
   font-size: 12px;
   line-height: 17px;
