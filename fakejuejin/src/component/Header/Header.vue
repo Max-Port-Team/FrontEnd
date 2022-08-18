@@ -1,5 +1,5 @@
 <template>
-  <div class="HeaderContainer" @mousedown="prevent($event)">
+  <div class="HeaderContainer" @mousedown="prevent($event)" ref="HeaderContainer">
     <Nav />
     <!-- <hr v-if="Show()" /> -->
     <NavDetail v-if="Show()" />
@@ -23,6 +23,11 @@ export default {
     },
   },
   components: { Nav, NavDetail },
+  mounted(){
+    if(this.$route.path=='/editer'){
+      this.$refs.HeaderContainer.hidden=true
+    }
+  }
 };
 </script>
 

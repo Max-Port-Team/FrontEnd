@@ -1,5 +1,5 @@
 <template>
-  <ul id="root">
+  <ul id="root" ref="ullist">
     <li>
       <svg
         data-v-27d2bf90=""
@@ -77,6 +77,7 @@ export default {
   },
   methods: {
     toMainPage() {
+      this.$refs.ullist.hidden=true
       this.$router.push("/user/" + window.localStorage.userId);
     },
     logout() {
