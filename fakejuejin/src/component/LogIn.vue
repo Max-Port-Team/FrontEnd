@@ -3,26 +3,26 @@
     <form class="auth-form">
       <div class="panfish">
         <div class="photo">
-          <img v-show="qwq" src="../assets/default.webp" alt="" />
+          <img v-show="qwq" src="../assets/default.svg" alt="" />
           <!-- <img :src="imgUrl" alt="图片" /> -->
           <!-- <img :src="'../assets/' + imageSrc[0] + '.png'" alt="图片" /> -->
         </div>
         <div class="photo">
-          <img v-show="account" src="../assets/account.webp" alt="" />
+          <img v-show="account" src="../assets/account.svg" alt="" />
         </div>
         <div class="photo">
-          <img v-show="password" src="../assets/password.webp" alt="" />
+          <img v-show="password" src="../assets/password.svg" alt="" />
         </div>
       </div>
-      <el-tooltip content="关闭" placement="bottom">
+      <!-- <el-tooltip content="关闭" placement="bottom">
         <el-button
           icon="el-icon-close"
           @click="closeBtn"
           class="close-btn"
           size="mini"
         ></el-button>
-      </el-tooltip>
-      <!-- <i>&#xe668;</i> -->
+      </el-tooltip> -->
+      <i @click="closeBtn" class="close-btn iconfont">&#xe668;</i>
 
       <div v-show="enroll" class="panel">
         <h1 class="title">账密登录</h1>
@@ -197,7 +197,7 @@
         和
         <a href="#" target="_blank"> 隐私政策 </a>
       </div>
-      <input type="button" class="test" @click="qwe" />
+      <!-- <input type="button" class="test" @click="qwe" /> -->
       <!-- <button type="”button”" @click="qwe">点击输出你想要的测试</button> -->
     </form>
   </div>
