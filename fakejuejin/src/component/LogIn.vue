@@ -93,7 +93,7 @@ export default {
     submitLogin() {
       if (this.userName && this.password) {
         console.log(this.userName, SHA256(this.password).toString());
-        fetch("http://43.156.106.129/api/MaxPort/people/login", {
+        fetch("http://localhost:8080/api/MaxPort/people/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

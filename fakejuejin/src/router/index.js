@@ -8,7 +8,7 @@ import UserBody from '../pages/User/pages/UserBody.vue'
 import UserSideBar from '../pages/User/components/UserSidebar.vue'
 import UserProfile from '../pages/User/components/UserProfile.vue'
 import LogIn from "../component/LogIn.vue";
-
+import Editer from "../pages/Editer.vue"
 export default new VueRouter({
 	routes: [
 		{
@@ -60,6 +60,11 @@ export default new VueRouter({
 			path: "/login",
 			component: LogIn,
 		},
+		{
+			name: "editer",
+			path: "/editer",
+			component: Editer,
+		}
 	],
   mode:'history'
 });

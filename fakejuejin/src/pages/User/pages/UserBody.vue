@@ -1,7 +1,7 @@
 <template>
   <div class="userbody-container">
     <div class="userbody-header">
-      <nav class="userbody-nav" @click="addHeightLight($event)">
+      <nav class="userbody-nav" @mousedown="prevent($event)">
         <router-link
           v-for="(one, key) in navlist"
           :key="key"
@@ -35,13 +35,12 @@ import Article from "../../Body/Article/Article.vue";
 export default {
   // http://43.156.106.129/api/MaxPort/people/get-detailed-by-id?id=4
   name: "UserBody",
-  components: { Article },
-  methods: {
-    addHeightLight(e) {
-      if (e.target.className == "navitem") {
-      }
-    },
+  methods:{ 
+    prevent(e){
+      e.preventDefault();
+    }
   },
+  components: { Article },
   data() {
     return {
       navlist: ["动态", "文章", "专栏", "沸点", "收藏集", "关注", "赞 ▼"],
