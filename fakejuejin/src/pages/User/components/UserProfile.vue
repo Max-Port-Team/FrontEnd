@@ -94,9 +94,51 @@
             </div>
             <div class="divide"></div>
           </form>
-          <button class="save-btn" @click="submit">保存修改</button>
+          <button class="save-btn" @click="submit('nameANDpassword')">
+            保存修改
+          </button>
         </div>
-        <div class="avatar-input">456</div>
+        <div class="avatar-input">
+          <div class="avatar-info">
+            <div class="avatar-uploader uploader">
+              <div class="click-cover" @click="uploadAvatar = !uploadAvatar">
+                <i class="add-icon byte-icon">
+                  <svg
+                    t="1561635709826"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="375017"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                  >
+                    <path
+                      d="M464.883436 464.883436V302.244035A23.732788 23.732788 0 0 1 488.616224 279.209271h46.069529a23.732788 23.732788 0 0 1 23.732788 23.034764v162.639401h162.6394a23.732788 23.732788 0 0 1 23.034765 23.732788v46.069529a23.732788 23.732788 0 0 1-23.034765 23.732788H558.418541v162.6394a23.732788 23.732788 0 0 1-23.732788 23.034765H488.616224a23.732788 23.732788 0 0 1-23.732788-23.034765V558.418541H302.244035A23.732788 23.732788 0 0 1 279.209271 534.685753V488.616224a23.732788 23.732788 0 0 1 23.034764-23.732788z m46.767552 465.581458a418.813906 418.813906 0 1 0-418.813906-418.813906 418.813906 418.813906 0 0 0 418.813906 418.813906z m0 92.837083a511.650988 511.650988 0 1 1 511.650989-511.650989 511.650988 511.650988 0 0 1-511.650989 511.650989z"
+                      p-id="375018"
+                    ></path>
+                  </svg>
+                </i>
+                <div class="click-text">点击修改头像</div>
+              </div>
+              <img :src="avatar" alt="" class="lazy avatar" />
+              <div class="inputAvatar" v-if="uploadAvatar">
+                <input
+                  name="avatarURL"
+                  autocomplete="off"
+                  placeholder="请输入链接..."
+                  required
+                  v-model="avatar"
+                  class="inputURL"
+                />
+                <button class="btn" @click="submit('avatar')">提交</button>
+                <div class="description">
+                  支持jpg、png、jpeg格式大小5M以内的图片链接
+                </div>
+              </div>
+            </div>
+            <div class="title">我的头像</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -111,6 +153,10 @@ export default {
       userName: window.localStorage.getItem("userName"),
       password: null,
       rePassword: null,
+      avatar:
+        window.localStorage.getItem("avatar") ||
+        require("../../../assets/5035712059_300x300.png"),
+      uploadAvatar: false,
     };
   },
   methods: {
@@ -130,19 +176,26 @@ export default {
         alert("两次密码不一致！");
       }
     },
-    submit() {
+    //(type:string)
+    submit(type) {
       if (this.rePassword != this.password) {
         alert("两次密码不一致！");
       } else {
+        let body;
+        if (type == "avatar") {
+          body = JSON.stringify({ avatar: this.avatar });
+        } else {
+          body = JSON.stringify({
+            nickname: this.userName,
+            password: SHA256(this.password).toString(),
+          });
+        }
         fetch("http://43.156.106.129/api/MaxPort/people/put-user-info", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            nickname: this.userName,
-            password: SHA256(this.password).toString(),
-          }),
+          body,
         })
           .catch((err) => {
             console.log(err);
@@ -160,6 +213,8 @@ export default {
             if (res.status) {
               alert("修改成功!");
               window.localStorage.setItem("userName", this.userName);
+              window.localStorage.setItem("avatar", this.avatar);
+              window.location.reload();
             } else {
               alert(res.errmsg);
             }
@@ -201,7 +256,7 @@ a {
 .ProfileHeader a {
   color: rgb(81, 87, 103);
 }
-.ProfileHeader a:hover {
+o .ProfileHeader a:hover {
   color: black;
 }
 .ProfileHeader svg {
@@ -271,7 +326,7 @@ a {
   width: 100%;
   border-top: 1px solid #eaeaea;
 }
-.info-input {
+o .info-input {
   min-width: 240px;
   width: calc(100% - 450px);
   margin-left: 30px;
@@ -295,6 +350,143 @@ a {
   background-color: #388eff;
 }
 .avatar-input {
-  padding-left: 75px;
+  padding-left: 74px;
+}
+
+.avatar-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 112px;
+}
+
+.avatar-info .uploader {
+  width: 90px;
+  height: 90px;
+}
+
+.avatar-uploader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-uploader .click-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(29, 33, 41, 0.5);
+  z-index: 2;
+  visibility: hidden;
+}
+
+.avatar-uploader:hover .click-cover {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.avatar-uploader .click-cover .add-icon {
+  font-size: 20px;
+}
+
+.byte-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+.byte-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.avatar-uploader .click-cover .click-text {
+  font-size: 12px;
+  margin-top: 7px;
+  line-height: 17px;
+  font-weight: 400;
+}
+
+.avatar-uploader .avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.lazy {
+  position: relative;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.inputAvatar {
+  position: absolute;
+  top: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 305px;
+  height: 64px;
+  flex-wrap: wrap;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  box-shadow: 0 5px 6px -7px;
+}
+
+.inputAvatar .inputURL {
+  width: 230px;
+  height: 28px;
+  border: 1px solid #e9e9e9;
+  outline: none;
+  box-sizing: border-box;
+  background: #fafafa;
+}
+
+.inputAvatar .btn {
+  width: 47px;
+  height: 28px;
+  margin-left: 8px;
+  color: #fff;
+  background-color: #007fff;
+  border-radius: 2px;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: none;
+}
+
+.inputAvatar .description {
+  color: #86909c;
+  font-size: 12px;
+  line-height: 17px;
+  font-weight: 400;
+}
+
+.avatar-info .title {
+  color: #1d2129;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 8px;
 }
 </style>
