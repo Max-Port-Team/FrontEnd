@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     toMainPage() {
-      this.$refs.ullist.hidden=true
+      this.$refs.ullist.hidden = true;
       this.$router.push("/user/" + window.localStorage.userId);
     },
     logout() {
@@ -110,6 +110,7 @@ export default {
   background-color: white;
   border: 1px solid rgba(177, 180, 185, 0.45);
   border-radius: 4px;
+  z-index: 2000;
 }
 li {
   list-style: none;
