@@ -2,14 +2,12 @@
   <div id="app">
     <Header />
     <main class="AppMain" ref="AppMain">
-      <router-view></router-view>
+      <router-view :key="keybody"></router-view>
       <router-view name="SideBar"></router-view>
-      <router-view name="LogIn"></router-view>
     </main>
     <footer class="AppFooter">
       <RollUp />
       <FeedBack />
-      <LogIn></LogIn>
     </footer>
   </div>
 </template>
@@ -23,6 +21,17 @@ import RollUp from "./component/RollUp.vue";
 import Body from "./pages/Body/Body.vue";
 export default {
   name: "App",
+  data() {
+    return {
+      keybody: 1,
+    };
+  },
+  watch: {
+    $route(from, to) {
+      this.keybody = Math.random();
+      this.$refs.AppMain.style.width = "980px";
+    },
+  },
   components: {
     Header,
     SideBar,
@@ -34,8 +43,8 @@ export default {
     if (this.$route.path == "/articledetail") {
       this.$refs.AppMain.style.width = "1180px";
     }
-    if (this.$route.path == "/") {
-      this.$refs.AppMain.style.width = "980px";
+    if (this.$route.path == "/user/profile") {
+      this.$refs.AppMain.style.width = "1180px";
     }
   },
 };
@@ -68,6 +77,9 @@ body {
   .BodyContainer {
     width: 100% !important;
   }
+  .user-container {
+    width: 100% !important;
+  }
 }
 .AppFooter {
   display: flex;
@@ -94,5 +106,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+.stopscroll {
+  overflow: hidden;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="catalog-container" ref="container">
+  <div class="catalog-container" ref="container" @mousedown="prevent($event)">
     <link
       rel="stylesheet"
       href="//at.alicdn.com/t/font_1473319176_4914331.css"
@@ -8,9 +8,9 @@
     <ul class="catalog-body" ref="scrollBody">
       <li v-for="(one, key) in catalogList" :key="key">
         <a
-          :href="`#${one.id}`"
+          @click="jump(one.id)"
           :style="`textIndent:${(one.getAttribute('h') * 1 - maxH) * 30}px`"
-          >{{ one.innerHTML }}</a
+          >{{ one.innerText }}</a
         >
       </li>
     </ul>
@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  
   name: "catalog",
   data() {
     return {
@@ -27,6 +28,14 @@ export default {
     };
   },
   methods: {
+    prevent(e){
+      e.preventDefault();
+      
+    }
+    ,
+    jump(id){
+      document.querySelector(`#${id}`).scrollIntoView(top)
+    },
     throttle(fnc, time) {
       let flag = true;
       return () => {
@@ -54,8 +63,9 @@ export default {
       if (ArticleBody.hasChildNodes()) {
         clearInterval(timer);
         for (let i = 6; i >= 1; i--) {
-          ArticleBody.querySelectorAll(`h${i}`).forEach((v) => {
+          ArticleBody.querySelectorAll(`h${i}`).forEach((v,k) => {
             v.setAttribute("H", i);
+            v.setAttribute("id",`h${i}${k}`);
             this.maxH = i;
           });
         }
@@ -66,8 +76,8 @@ export default {
             .querySelectorAll("li");
           this.catalogList.forEach((v, key) => {
             if (
-              v.offsetTop+125 <= window.pageYOffset &&
-              this.catalogList[key + 1].offsetTop+125 >= window.pageYOffset
+              v.offsetTop+70 <= window.pageYOffset &&
+              this.catalogList[key + 1]?.offsetTop+125 >= window.pageYOffset
             ) {
               lis.forEach((v)=>{v.classList.remove('catalog-liborder')})
                 lis[key].classList.add('catalog-liborder')
@@ -132,7 +142,7 @@ export default {
   height: 15px;
   margin-top: 25px;
   border-radius: 1px;
-
+  cursor: pointer;
 }
 .catalog-liborder {
   border: 2px solid transparent;

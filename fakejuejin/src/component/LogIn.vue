@@ -3,15 +3,15 @@
     <form class="auth-form">
       <div class="panfish">
         <div class="photo">
-          <img v-show="qwq" src="../assets/default.svg" alt="" />
+          <img v-show="svgStatus == 0" src="../assets/default.svg" alt="" />
           <!-- <img :src="imgUrl" alt="图片" /> -->
           <!-- <img :src="'../assets/' + imageSrc[0] + '.png'" alt="图片" /> -->
         </div>
         <div class="photo">
-          <img v-show="account" src="../assets/account.svg" alt="" />
+          <img v-show="svgStatus == 1" src="../assets/account.svg" alt="" />
         </div>
         <div class="photo">
-          <img v-show="password" src="../assets/password.svg" alt="" />
+          <img v-show="svgStatus == 2" src="../assets/password.svg" alt="" />
         </div>
       </div>
       <!-- <el-tooltip content="关闭" placement="bottom">
@@ -31,9 +31,12 @@
             <input
               name="loginPhoneOrEmail"
               autocomplete="off"
-              placeholder="邮箱/手机号（国际号码加区号）"
+              placeholder="昵称"
               class="input"
-              maxlength="64"
+              maxlength="20"
+              required
+              v-model="userName"
+              @click="inputFocus"
               @blur="blur"
               @focus="focusAccount"
             />
@@ -45,15 +48,18 @@
               placeholder="请输入密码"
               type="password"
               class="input"
-              maxlength="64"
+              maxlength="20"
+              required
+              v-model="password"
+              @click="inputFocus"
               @blur="blur"
               @focus="focusPassword"
             />
           </div>
         </div>
-        <button class="btn">登录</button>
+        <button class="btn" @click.prevent="submitLogin">登录</button>
         <div class="prompt-box">
-          <span class="clickable" @click="toEnroll">立即注册</span>
+          <span class="clickable" @click="enroll = false">立即注册</span>
           <span class="right clickable">忘记密码</span>
         </div>
       </div>
@@ -83,19 +89,22 @@
             <input
               name="loginPhoneOrEmail"
               autocomplete="off"
-              placeholder="邮箱/手机号（国际号码加区号）"
+              placeholder="昵称"
               class="input"
-              maxlength="64"
+              maxlength="20"
+              @click="inputFocus"
               @blur="blur"
               @focus="focusAccount"
-              v-model="accountData"
+              v-model="userName"
             />
           </div>
           <div class="input-tip-first">
-            <div v-show="accountTip" class="input-tip">输入的账号不能为空</div>
+            <div v-show="accountTip[0]" class="input-tip">
+              输入的账号不能为空
+            </div>
           </div>
           <div class="input-tip-first">
-            <div v-show="accountTip1" class="input-tip">
+            <div v-show="accountTip[1]" class="input-tip">
               输入的账号长度超过20
             </div>
           </div>
@@ -107,19 +116,20 @@
               placeholder="请输入密码"
               type="password"
               class="input"
-              maxlength="64"
+              maxlength="20"
+              @click="inputFocus"
               @blur="blur"
               @focus="focusPassword"
-              v-model="passwordData1"
+              v-model="password"
             />
           </div>
           <div class="input-tip-first">
-            <div v-show="passwordTip1" class="input-tip">
+            <div v-show="passwordTip[0]" class="input-tip">
               输入的密码不能为空
             </div>
           </div>
           <div class="input-tip-first">
-            <div v-show="passwordTip4" class="input-tip">
+            <div v-show="passwordTip[3]" class="input-tip">
               输入的密码长度超过20
             </div>
           </div>
@@ -135,21 +145,22 @@
               placeholder="请再次输入密码"
               type="password"
               class="input"
-              maxlength="64"
+              maxlength="20"
+              @click="inputFocus"
               @blur="blur"
               @focus="focusPassword"
-              v-model="passwordData2"
+              v-model="repeatPassword"
             />
           </div>
           <div class="input-tip-first">
-            <div v-show="passwordTip3" class="input-tip">
+            <div v-show="passwordTip[2]" class="input-tip">
               <div>您两次输入的密码不一样</div>
             </div>
           </div>
         </div>
-        <button class="btn">立即注册</button>
+        <button class="btn" @click.prevent="submitRegister">立即注册</button>
         <div class="prompt-box">
-          <span class="clickable" @click="backEnroll">返回登录</span>
+          <span class="clickable" @click="enroll = true">返回登录</span>
           <!-- <span class="right clickable">忘记密码</span> -->
         </div>
       </div>
@@ -186,16 +197,16 @@
       </div>
       <div v-show="enroll" class="agreement-box">
         登录即表示同意
-        <a href="#" target="_blank">用户协议</a>
+        <a href="https://juejin.cn/terms" target="_blank">用户协议</a>
         、
-        <a href="#" target="_blank"> 隐私政策 </a>
+        <a href="https://juejin.cn/privacy" target="_blank"> 隐私政策 </a>
       </div>
-      <div v-show="!enroll" class="agreement-box-enroll">
-        <input type="radio" @click="toggleChecked($event)" />
-        我已经阅读并同意
-        <a href="#" target="_blank">用户协议</a>
+      <div v-show="!enroll" class="agreement-box">
+        <!-- <input type="radio" @click="toggleChecked($event)" /> -->
+        注册即表示同意
+        <a href="https://juejin.cn/terms" target="_blank">用户协议</a>
         和
-        <a href="#" target="_blank"> 隐私政策 </a>
+        <a href="https://juejin.cn/privacy" target="_blank"> 隐私政策 </a>
       </div>
       <!-- <input type="button" class="test" @click="qwe" /> -->
       <!-- <button type="”button”" @click="qwe">点击输出你想要的测试</button> -->
@@ -204,127 +215,140 @@
 </template>
 
 <script>
+import SHA256 from "crypto-js/sha256";
 export default {
-  name: "login",
   data() {
     return {
-      //在vue项目中动态设置图片src时候，默认会当做静态资源处理而不去编译，使用require引入图片即可。
-      // imageSrc: ["default", "account", "password"],
-      // imgUrl: require("../assets/default.webp"),
-      qwq: true,
-      account: false,
-      password: false,
+      userName: null,
+      password: null,
+      repeatPassword: null,
+      svgStatus: 0,
       enroll: true,
-      depList: [],
-      enterprise: "",
-      index: "",
-      accountData: "",
-      passwordData1: "",
-      passwordData2: "",
-      accountTip: false,
-      accountTip1: false,
-      passwordTip1: false,
-      passwordTip2: false,
-      passwordTip3: false,
-      passwordTip4: false,
+      accountTip: [false, false],
+      passwordTip: [false, false, false, false],
     };
   },
   methods: {
     blur() {
-      console.log("blur");
-      this.qwq = true;
-      this.account = false;
-      this.password = false;
+      this.svgStatus = 0;
     },
     focusAccount() {
-      console.log("focusAccount");
-      this.account = true;
-      this.qwq = false;
+      this.svgStatus = 1;
     },
     focusPassword() {
-      console.log("focusPassword");
-      this.password = true;
-      this.qwq = false;
+      this.svgStatus = 2;
     },
     closeBtn() {
       console.log("closeBtn");
     },
-    toEnroll() {
-      console.log("toEnroll");
-      this.enroll = false;
-    },
-    backEnroll() {
-      console.log("backEnroll");
-      this.enroll = true;
-    },
-    //单选框复选清空功能
-    toggleChecked(e) {
-      //赋值
-      this.enterprise = this.depList[e.target.value];
-      //判断重复点击后，取消选中，清空值，重置index
-      if (this.index === e.target.value) {
-        e.target.checked = !e.target.checked;
-        this.enterprise = {};
-        this.index = "";
-        // console.log(this.enterprise);
+    submitLogin() {
+      if (this.userName && this.password) {
+        fetch("http://localhost:8080/api/MaxPort/people/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nickname: this.userName,
+            password: SHA256(this.password).toString(),
+          }),
+        })
+          .then((res) => {
+            if (res.status == 200) return res.json();
+            else {
+              alert("用户名或密码错误！");
+            }
+          })
+          .then((res) => {
+            window.localStorage.clear();
+            window.localStorage.setItem("userName", res.nickname);
+            window.localStorage.setItem("userId", res.id);
+            if (res.avatar) window.localStorage.setItem("avatar", res.avatar);
+            window.location.href = "/";
+          });
       }
-      //否则保存当前点击的索引
-      else {
-        this.index = e.target.value;
-        // console.log(this.index);
+    },
+    submitRegister() {
+      if (
+        this.userName &&
+        this.password &&
+        this.password == this.repeatPassword
+      ) {
+        fetch("http://localhost:8080/api/MaxPort/people/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nickname: this.userName,
+            password: SHA256(this.password).toString(),
+          }),
+        })
+          .then((res) => {
+            if (res.status == 200) return res.json();
+            else if (res.status == 400) {
+              alert("用户名被占用！");
+            } else alert("注册失败！");
+          })
+          .then((res) => {
+            alert("注册成功！");
+            this.enroll = true;
+          });
       }
     },
-    qwe() {
-      console.log(this.accountData);
-      console.log(this.passwordData1);
-      console.log(this.passwordData2);
-      console.log(this.accountData.length);
+    inputFocus(e) {
+      e.target.focus();
     },
   },
   watch: {
-    accountData(newVal, oldVal) {
+    userName(newVal, oldVal) {
       if (newVal == "") {
-        this.accountTip = true;
-        this.accountTip1 = false;
+        this.accountTip = [true, false];
       } else {
-        this.accountTip = false;
+        this.accountTip[0] = false;
         if (newVal.length > 20) {
-          this.accountTip1 = true;
+          this.accountTip[1] = true;
         } else {
-          this.accountTip1 = false;
+          this.accountTip[1] = false;
         }
       }
     },
-    passwordData1(newVal, oldVal) {
+    password(newVal, oldVal) {
       if (newVal == "") {
-        this.passwordTip1 = true;
-        this.passwordTip4 = false;
+        this.passwordTip[0] = true;
+        this.passwordTip[3] = false;
       } else {
-        this.passwordTip1 = false;
+        this.passwordTip[0] = false;
         if (newVal.length > 20) {
-          this.passwordTip4 = true;
+          this.passwordTip[3] = true;
         } else {
-          this.passwordTip4 = false;
+          this.passwordTip[3] = false;
         }
       }
-      if (newVal != this.passwordData2) {
-        this.passwordTip3 = true;
+      if (newVal != this.repeatPassword) {
+        this.passwordTip[2] = true;
       } else {
-        this.passwordTip3 = false;
+        this.passwordTip[2] = false;
       }
     },
-    passwordData2(newVal, oldVal) {
+    repeatPassword(newVal, oldVal) {
       if (newVal == "") {
-        this.passwordTip2 = true;
+        this.passwordTip[1] = true;
       } else {
-        this.passwordTip2 = false;
+        this.passwordTip[1] = false;
       }
-      if (newVal != this.passwordData1) {
-        this.passwordTip3 = true;
+      if (newVal != this.password) {
+        this.passwordTip[2] = true;
       } else {
-        this.passwordTip3 = false;
+        this.passwordTip[2] = false;
       }
     },
+  },
+  mounted() {
+    document.querySelector("body").classList.add("stopscroll");
+  },
+  beforeDestroy() {
+    document.querySelector("body").classList.remove("stopscroll");
   },
 };
 </script>
@@ -414,6 +438,7 @@ a {
   border-radius: 2px;
   outline: none;
   box-sizing: border-box;
+  user-select: all !important;
 }
 
 .btn {

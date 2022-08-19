@@ -7,8 +7,7 @@ import router from './router'
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
-// Vue.use(ElementUI);  //引入element
 new Vue({
   render: h => h(App),
-  router
+  router,
 }).$mount('#app')
