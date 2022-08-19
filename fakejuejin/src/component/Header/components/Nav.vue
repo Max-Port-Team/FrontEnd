@@ -60,7 +60,7 @@ export default {
     avatarPath() {
       return (
         window.localStorage.getItem("avatar") ||
-        "../../../assets/5035712059_300x300.png"
+        require("../../../assets/5035712059_300x300.png")
       );
     },
   },

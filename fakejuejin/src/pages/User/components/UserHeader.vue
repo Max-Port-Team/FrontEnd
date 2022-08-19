@@ -211,7 +211,7 @@ export default {
         this.user.userId = res[0].id;
         this.user.username = res[0].nickname;
         this.user.avatar =
-          res[0].avatar || "../../../assets/5035712059_300x300.png";
+          res[0].avatar || require("../../../assets/5035712059_300x300.png");
       });
   },
 };
