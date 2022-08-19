@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import "./iconfont/iconfont.css";
 import Header from "./component/Header/Header.vue";
 import SideBar from "./component/SideBar/SideBar.vue";
 import FeedBack from "./component/FeedBack.vue";
@@ -36,7 +37,7 @@ export default {
     SideBar,
     RollUp,
     FeedBack,
-    Body
+    Body,
   },
   mounted() {
     if (this.$route.path == "/articledetail") {
@@ -106,7 +107,7 @@ body {
   justify-content: center;
   cursor: pointer;
 }
-.stopscroll{
+.stopscroll {
   overflow: hidden;
 }
 </style>
