@@ -239,7 +239,7 @@ export default {
       this.svgStatus = 2;
     },
     closeBtn() {
-      console.log("closeBtn");
+      this.$parent.showLoginFrame = false;
     },
     submitLogin() {
       if (this.userName && this.password) {
