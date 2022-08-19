@@ -45,6 +45,10 @@ export default {
     if (this.$route.path == "/user/profile") {
       this.$refs.AppMain.style.width = "1180px";
     }
+    if(this.$route.path=='/editer'){
+        this.$refs.AppMain.style.width = "100%";
+        this.$refs.AppMain.style.marginTop = "0";
+    }
   },
 };
 </script>
