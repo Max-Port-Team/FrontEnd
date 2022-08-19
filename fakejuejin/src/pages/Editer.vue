@@ -16,27 +16,65 @@
       <div class="edit-tolls"></div>
     </header>
     <main class="editer-main">
-      <div class="edit-write" contenteditable="true"></div>
-      <div class="edit-preview"></div>
+      <div
+        class="edit-write"
+        contenteditable="true"
+        ref="writer"
+        tabindex="-1"
+      ></div>
+      <div class="edit-preview" ref="preview"></div>
     </main>
     <footer class="edit-footer"></footer>
   </div>
 </template>
 
 <script>
-export default {};
+import { marked } from "marked";
+import '../assets/previewcss.css'
+export default {
+  data() {
+    return {
+      mdstr: "",
+    };
+  },
+  methods: {
+    antishake(fnc, dalay) {
+      let timer = null;
+      return () => {
+        clearTimeout(timer);
+        timer = setTimeout(fnc, dalay);
+      };
+    },
+    asinput() {
+      return this.antishake(() => {
+        this.$refs.preview.innerHTML = marked.parse(
+          this.$refs.writer.innerHTML
+        );
+      }, 500);
+    },
+  },
+  computed: {
+    htmlstr() {
+      return marked.parse(this.mdstr);
+    },
+  },
+  mounted() {
+    this.$refs.writer.focus();
+    this.$refs.writer.addEventListener("input", this.asinput());
+  },
+};
 </script>
 
 <style scoped>
-.edit-footer{
+.edit-footer {
   bottom: 0;
   width: 100%;
-  height:20px;
+  height: 20px;
   background-color: rgb(255, 255, 255);
 }
 .edit-preview {
-  flex-grow: 1;
-  padding:25px;
+  width: 50%;
+  padding: 25px;
   height: 100%;
   background-color: white;
   border-bottom: 1px solid rgb(230, 223, 223);
@@ -47,12 +85,31 @@ export default {};
   box-sizing: border-box;
   outline: none;
   padding: 25px;
-  flex-grow: 1;
+  width: 50%;
   height: 100%;
   border-right: 1px solid rgb(230, 223, 223);
   background-color: rgb(246, 247, 248);
   border-bottom: 1px solid rgb(230, 223, 223);
   overflow-y: scroll;
+  box-sizing: border-box;
+  color: rgb(51, 51, 51);
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  max-width: 800px;
+  overflow-x: hidden;
+  padding-bottom: 16px;
+  padding-left: 18.3667px;
+  padding-right: 18.3667px;
+  padding-top: 16px;
+  text-rendering: optimizelegibility;
+  word-break: break-word;
 }
 .editer-main {
   position: relative;
