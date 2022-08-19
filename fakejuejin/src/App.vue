@@ -48,6 +48,7 @@ export default {
     if(this.$route.path=='/editer'){
         this.$refs.AppMain.style.width = "100%";
         this.$refs.AppMain.style.marginTop = "0";
+        document.querySelector('body').style.overflow='hidden'
     }
   },
 };

@@ -15,8 +15,8 @@
       </div>
       <div class="edit-tolls"></div>
     </header>
-    <main>
-      <div class="edit-write"></div>
+    <main class="editer-main">
+      <div class="edit-write" contenteditable="true"></div>
       <div class="edit-preview"></div>
     </main>
     <footer class="edit-footer"></footer>
@@ -28,16 +28,67 @@ export default {};
 </script>
 
 <style scoped>
-.editer-publish{
-    
-    text-align: center;
-    width: 52px;
-    height: 32px;
-    color:white;
-    line-height: 32px;
-    border-radius: 3px;
-    background-color: rgb(29, 125, 250);
-    font-weight: 400;
+.edit-footer{
+  bottom: 0;
+  width: 100%;
+  height:20px;
+  background-color: rgb(255, 255, 255);
+}
+.edit-preview {
+  flex-grow: 1;
+  padding:25px;
+  height: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgb(230, 223, 223);
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+.edit-write {
+  box-sizing: border-box;
+  outline: none;
+  padding: 25px;
+  flex-grow: 1;
+  height: 100%;
+  border-right: 1px solid rgb(230, 223, 223);
+  background-color: rgb(246, 247, 248);
+  border-bottom: 1px solid rgb(230, 223, 223);
+  overflow-y: scroll;
+}
+.editer-main {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  margin-top: -2.5px;
+  width: 100%;
+  height: calc(100vh - 115px);
+  justify-content: center;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-feature-settings: normal;
+  font-kerning: auto;
+  font-language-override: normal;
+  font-optical-sizing: auto;
+  font-size: 14px;
+  font-size-adjust: none;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-alternates: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-variant-position: normal;
+  font-variation-settings: normal;
+  font-weight: 400;
+}
+.editer-publish {
+  text-align: center;
+  width: 52px;
+  height: 32px;
+  color: white;
+  line-height: 32px;
+  border-radius: 3px;
+  background-color: rgb(29, 125, 250);
+  font-weight: 400;
 }
 .editer-draftbox {
   appearance: button;
@@ -106,14 +157,14 @@ export default {};
   cursor: default;
 }
 .editer-avatar {
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
 }
 .editer-other {
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
   height: 40px;
   width: 650px;
 }
@@ -131,7 +182,8 @@ export default {};
 .edier-container {
   width: 100%;
   height: 100%;
-  background-color: rgb(252, 250, 250);
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
 }
 .edier-header {
   width: 100%;
@@ -148,7 +200,7 @@ export default {};
 .edit-tolls {
   width: 100%;
   height: 32px;
-  border: 1px solid black;
+  border: 1px solid rgb(221, 221, 221);
 }
 @font-face {
   font-family: "iconfont"; /* Project id 3448432 */

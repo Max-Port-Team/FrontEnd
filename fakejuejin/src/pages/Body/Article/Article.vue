@@ -62,12 +62,12 @@ export default {
       if(isConfirm){
         fetch('http://localhost:8080/api/MaxPort/article/deleteArticle',{
           method:'DELETE',
-          //  headers: {
-          //   "Content-Type": "application/json",
-          // },
-          body:{
+           headers: {
+            "Content-Type": "application/json",
+          },
+          body:JSON.stringify({
             id:this.one.id
-          }
+          })
         }).then(()=>{
           this.$refs.ArticleContainer.hidden=true;
         })
