@@ -1,5 +1,5 @@
 <template>
-  <button title="建议反馈" class="footer_btn meiqia-btn">
+  <button title="建议反馈" class="footer_btn meiqia-btn" ref="feedback">
     <svg
       width="16"
       height="16"
@@ -22,6 +22,11 @@
 <script>
   export default {
     name: "FeedBack",
+    mounted(){
+      if(this.$route.path=='/editer'){
+        this.$refs.feedback.style.display='none'
+      }
+    }
   };
 </script>
 
