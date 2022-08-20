@@ -9,6 +9,7 @@ import UserSideBar from '../pages/User/components/UserSidebar.vue'
 import UserProfile from '../pages/User/components/UserProfile.vue'
 import LogIn from "../component/LogIn.vue";
 import Editer from "../pages/Editer.vue"
+import Pubdone from '../pages/Pubdone.vue'
 export default new VueRouter({
 	routes: [
 		{
@@ -64,6 +65,10 @@ export default new VueRouter({
 			name: "editer",
 			path: "/editer",
 			component: Editer,
+		},
+		{
+			path:"/pubdone",
+			component:Pubdone
 		}
 	],
   mode:'history'

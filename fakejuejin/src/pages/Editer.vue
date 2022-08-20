@@ -1,5 +1,5 @@
 <template>
-  <div class="edier-container">
+  <div class="edier-container" v-if='isPublish'>
     <header class="edier-header">
       <div class="title-other">
         <input
@@ -11,21 +11,14 @@
         <div class="editer-other">
           <div class="editer-tip">文章将自动保存到草稿箱</div>
           <div class="editer-draftbox">草稿箱</div>
-          <div class="editer-publish" @click="publish">
+          <div class="editer-publish" @click="showDeatilDody($event)">
             发布
-            <div class="publish-deatil">
+            <div class="publish-deatil" v-if="isshow">
               <header class="deatil-header">发布文章</header>
-              <section class="deatil-body">
+              <section class="deatil-body" >
                 <div class="body-classes">
                   <ul @click="chooseclass($event)">
-                    <li>后端</li>
-                    <li>前端</li>
-                    <li>Android</li>
-                    <li>iOS</li>
-                    <li>人工智能</li>
-                    <li>开发工具</li>
-                    <li>代码人生</li>
-                    <li>阅读</li>
+                    <li v-for="(name,key) in classList" :key='key' ref='classes'>{{name}}</li>
                   </ul>
                 </div>
                 <div class="body-textarea">
@@ -33,14 +26,16 @@
                 </div>
                 
               </section>
-
-              <footer class="deatil-footer"></footer>
+              <footer class="detail-footer"> 
+                <button class="cancelBut">取消</button>
+                <button class="confirmBut" @click="publish">确定并发布</button>
+              </footer>
             </div>
           </div>
           <div>
             <i class="iconfont icon-zhuanhuan"></i>
           </div>
-          <img src="../assets/6.webp" class="editer-avatar" />
+          <img :src="src" class="editer-avatar" />
         </div>
       </div>
       <div class="edit-tolls"></div>
@@ -65,14 +60,30 @@ export default {
   name: "Editer",
   data() {
     return {
+      src:localStorage.getItem('avatar'),
       title: "",
       intro:"",
-      class:''
+      class:'',
+      isshow:false,
+      isPublish:true,
+      classList:['后端','前端','Android','iOS','人工智能','开发工具','代码人生','阅读']
     };
   },
   methods: {
-    chooseclass(){
-      
+    showDeatilDody(e){
+      if(e.target.className=='editer-publish'){
+        this.isshow=!this.isshow
+      }
+    }
+    ,
+    chooseclass(e){
+      if(e.target.tagName=='LI'){
+        this.$refs.classes.forEach(element => {
+          element.classList.remove('class-heightlight');
+        });
+        e.target.classList.add('class-heightlight');
+        this.class= e.target.innerText;
+      }
     }
     ,
     antishake(fnc, dalay) {
@@ -90,20 +101,24 @@ export default {
       }, 500);
     },
     publish() {
-      // fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     title: "titile",
-      //     tag: "frontend",
-      //     intro: "intro",
-      //     body: this.$refs.writer.innerText,
-      //   }),
-      // }).then((res) => {
-      //   console.log(res);
-      // });
+      fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title:this.title,
+          tag: this.class,
+          intro: this.intro,
+          body: this.$refs.writer.innerText,
+        }),
+      })
+      .then(res=> res.json())
+      .then(res=>{
+        this.isPublish=false;
+        this.$router.replace({path:`/pubdone?id=${res.id}&title=${this.title}`});
+        this.$router.go(0)
+      })
     },
   },
   computed: {
@@ -119,6 +134,43 @@ export default {
 </script>
 
 <style scoped>
+.class-heightlight{
+  color: #1d7dfa !important;
+  background-color: #e8f3ff !important;
+}
+.detail-footer{
+  position: relative;
+  width: 100%;
+  height: 59px;
+}
+.confirmBut{
+  position: absolute;
+  top: 17px;
+  left: 420px;
+  width: 80px;
+  text-align: center;
+  line-height: 25px;
+  height: 25px;
+  background-color: #1e80ff;
+  border-radius: 5px;
+  border: none;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.cancelBut{
+  position: absolute;
+  width: 80px;
+  top: 17px;
+  left: 320px;
+  text-align: center;
+  line-height: 25px;
+  height: 25px;
+  color: #1e80ff;
+  background-color: white;
+  border: 1px solid rgb(30, 128, 255);
+  border-radius: 5px;
+  cursor: pointer;
+}
 .textarea{
   box-sizing: border-box;
   padding: 10px;
@@ -316,6 +368,7 @@ export default {
   border-radius: 3px;
   background-color: rgb(29, 125, 250);
   font-weight: 400;
+  cursor: pointer;
 }
 .editer-draftbox {
   appearance: button;
