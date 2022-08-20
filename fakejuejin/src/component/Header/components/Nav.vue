@@ -20,7 +20,7 @@
       </li>
       <li>
         <div v-if="loggedIn">
-          <img class="avatar" :src="avatarPath" alt="" />
+          <img class="avatar" :src="avatarPath" alt="" @click="changeMenu"/>
           <NavMenu v-show="showMenu" />
         </div>
         <button v-else class="login-button" @click="showLoginFrame = true">
@@ -65,6 +65,10 @@ export default {
     },
   },
   methods: {
+    changeMenu(){
+      this.showMenu=!this.showMenu
+    }
+    ,
     prevent(e) {
       e.preventDefault();
     },
