@@ -25,7 +25,7 @@
           fill="#86909C"
         ></path>
       </svg>
-      <span >写文章</span>
+      <span>写文章</span>
     </li>
     <li @click="toMainPage">
       <svg
@@ -76,9 +76,9 @@ export default {
     return {};
   },
   methods: {
-    goEdit(){
-      let routeData = this.$router.resolve({path: `/editer`});
-      window.open(routeData.href, '_blank');
+    goEdit() {
+      let routeData = this.$router.resolve({ path: `/editer` });
+      window.open(routeData.href, "_blank");
     },
     toMainPage() {
       this.$router.push("/user/" + window.localStorage.userId);
