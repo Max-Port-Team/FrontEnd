@@ -76,12 +76,11 @@ export default {
     return {};
   },
   methods: {
-    goedit(){
-      let routeData = this.$router.resolve({name: "editer"});
-      window.open(routeData.href, '_blank');
+    goedit() {
+      let routeData = this.$router.resolve({ name: "editer" });
+      window.open(routeData.href, "_blank");
     },
     toMainPage() {
-      this.$refs.ullist.hidden = true;
       this.$router.push("/user/" + window.localStorage.userId);
     },
     logout() {
@@ -96,10 +95,10 @@ export default {
   },
   mounted() {
     document.addEventListener("click", (e) => {
-      if (!this.$el.parentNode.contains(e.target)) {
-        this.$parent.changeShowMenu(false); //点击其他区域关闭
-      } else {
+      if (e.target === this.$el.previousElementSibling) {
         this.$parent.changeShowMenu(true);
+      } else {
+        this.$parent.changeShowMenu(false); //点击其他区域关闭
       }
     });
   },
