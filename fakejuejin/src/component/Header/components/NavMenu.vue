@@ -96,9 +96,9 @@ export default {
   mounted() {
     document.addEventListener("click", (e) => {
       if (e.target === this.$el.previousElementSibling) {
-        this.$parent.changeShowMenu(true);
+        this.$parent.showMenu = !this.$parent.showMenu;
       } else {
-        this.$parent.changeShowMenu(false); //点击其他区域关闭
+        this.$parent.showMenu = false; //点击其他区域关闭
       }
     });
   },

@@ -5,8 +5,8 @@
     /></a>
     <ul class="nav-list" @mousedown="prevent($event)">
       <li>
-        <ul class="nav-router-list" >
-          <li v-for="link in links" :key="link.id" >
+        <ul class="nav-router-list">
+          <li v-for="link in links" :key="link.id">
             <router-link
               :to="link.path"
               exact-active-class="active"
@@ -71,9 +71,6 @@ export default {
     ,
     prevent(e) {
       e.preventDefault();
-    },
-    changeShowMenu(status) {
-      this.showMenu = status;
     },
     IsActive(path) {
       if (
