@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     goEdit() {
-      let routeData = this.$router.resolve({ path: `/editer` });
+      let routeData = this.$router.resolve({ path: `/editor` });
       window.open(routeData.href, "_blank");
     },
     toMainPage() {

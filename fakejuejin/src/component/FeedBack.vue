@@ -20,22 +20,22 @@
 </template>
 
 <script>
-  export default {
-    name: "FeedBack",
-    mounted(){
-      if(this.$route.path=='/editer'){
-        this.$refs.feedback.style.display='none'
-      }
+export default {
+  name: "FeedBack",
+  mounted() {
+    if (this.$route.path == "/editor") {
+      this.$refs.feedback.style.display = "none";
     }
-  };
+  },
+};
 </script>
 
 <style scoped>
-  .meiqia-btn {
-    font-size: 20px;
-    color: #007fff;
-  }
-  .meiqia-btn:hover {
-    box-shadow: 0 0 8px rgba(40, 40, 40, 0.15);
-  }
+.meiqia-btn {
+  font-size: 20px;
+  color: #007fff;
+}
+.meiqia-btn:hover {
+  box-shadow: 0 0 8px rgba(40, 40, 40, 0.15);
+}
 </style>
