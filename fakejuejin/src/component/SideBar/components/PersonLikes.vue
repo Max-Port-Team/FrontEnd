@@ -70,8 +70,6 @@ export default {
             .then(
               (response) => {
                 this.visit = response.visit
-                console.log(response)
-                console.log(this.author)
               },
               (error) => {
                 console.log("请求失败", error.message);

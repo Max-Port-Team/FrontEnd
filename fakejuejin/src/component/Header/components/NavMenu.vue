@@ -1,6 +1,6 @@
 <template>
   <ul id="root" ref="ullist">
-    <li>
+    <li @click="goEdit">
       <svg
         data-v-27d2bf90=""
         width="16"
@@ -25,7 +25,7 @@
           fill="#86909C"
         ></path>
       </svg>
-      <span @click="goedit">写文章</span>
+      <span >写文章</span>
     </li>
     <li @click="toMainPage">
       <svg
@@ -76,8 +76,8 @@ export default {
     return {};
   },
   methods: {
-    goedit(){
-      let routeData = this.$router.resolve({name: "editer"});
+    goEdit(){
+      let routeData = this.$router.resolve({path: `/editer`});
       window.open(routeData.href, '_blank');
     },
     toMainPage() {

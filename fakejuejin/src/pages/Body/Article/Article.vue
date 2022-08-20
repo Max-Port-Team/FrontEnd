@@ -38,7 +38,7 @@ export default {
   props: ["one","nickName"],
   methods:{
     goedit(){
-      let routeData = this.$router.resolve({name: "editer"});
+      let routeData = this.$router.resolve({path: `/editer?id=${this.one.id}`});
       window.open(routeData.href, '_blank');
     },
     comfirmDelete(){

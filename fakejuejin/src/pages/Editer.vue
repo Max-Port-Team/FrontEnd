@@ -1,5 +1,5 @@
 <template>
-  <div class="edier-container" v-if='isPublish'>
+  <div class="edier-container" v-if="isPublish">
     <header class="edier-header">
       <div class="title-other">
         <input
@@ -15,19 +15,31 @@
             发布
             <div class="publish-deatil" v-if="isshow">
               <header class="deatil-header">发布文章</header>
-              <section class="deatil-body" >
+              <section class="deatil-body">
                 <div class="body-classes">
                   <ul @click="chooseclass($event)">
-                    <li v-for="(name,key) in classList" :key='key' ref='classes'>{{name}}</li>
+                    <li
+                      v-for="(name, key) in classList"
+                      :key="key"
+                      ref="classes"
+                    >
+                      {{ name }}
+                    </li>
                   </ul>
                 </div>
                 <div class="body-textarea">
-                  <textarea class="textarea" cols="20" rows="5" v-model="intro"></textarea>
+                  <textarea
+                    class="textarea"
+                    cols="20"
+                    rows="5"
+                    v-model="intro"
+                  ></textarea>
                 </div>
-                
               </section>
-              <footer class="detail-footer"> 
-                <button class="cancelBut">取消</button>
+              <footer class="detail-footer">
+                <button class="cancelBut" @click="isshow = !isshow">
+                  取消
+                </button>
                 <button class="confirmBut" @click="publish">确定并发布</button>
               </footer>
             </div>
@@ -60,32 +72,46 @@ export default {
   name: "Editer",
   data() {
     return {
-      src:localStorage.getItem('avatar'),
+      src: localStorage.getItem("avatar"),
       title: "",
-      intro:"",
-      class:'',
-      isshow:false,
-      isPublish:true,
-      classList:['后端','前端','Android','iOS','人工智能','开发工具','代码人生','阅读']
+      intro: "",
+      class: "",
+      isshow: false,
+      isPublish: true,
+      classList: [
+        "后端",
+        "前端",
+        "Android",
+        "iOS",
+        "人工智能",
+        "开发工具",
+        "代码人生",
+        "阅读",
+      ],
     };
   },
   methods: {
-    showDeatilDody(e){
-      if(e.target.className=='editer-publish'){
-        this.isshow=!this.isshow
-      }
-    }
-    ,
-    chooseclass(e){
-      if(e.target.tagName=='LI'){
-        this.$refs.classes.forEach(element => {
-          element.classList.remove('class-heightlight');
+    showDeatilDody(e) {
+      if (e.target.className == "editer-publish") {
+        this.isshow = !this.isshow;
+        this.$nextTick(() => {
+          this.$refs.classes.forEach((element) => {
+            if (element.innerText == this.class) {
+              element.classList.add("class-heightlight");
+            }
+          });
         });
-        e.target.classList.add('class-heightlight');
-        this.class= e.target.innerText;
       }
-    }
-    ,
+    },
+    chooseclass(e) {
+      if (e.target.tagName == "LI") {
+        this.$refs.classes.forEach((element) => {
+          element.classList.remove("class-heightlight");
+        });
+        e.target.classList.add("class-heightlight");
+        this.class = e.target.innerText;
+      }
+    },
     antishake(fnc, dalay) {
       let timer = null;
       return () => {
@@ -101,24 +127,53 @@ export default {
       }, 500);
     },
     publish() {
-      fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title:this.title,
-          tag: this.class,
-          intro: this.intro,
-          body: this.$refs.writer.innerText,
-        }),
-      })
-      .then(res=> res.json())
-      .then(res=>{
-        this.isPublish=false;
-        this.$router.replace({path:`/pubdone?id=${res.id}&title=${this.title}`});
-        this.$router.go(0)
-      })
+      if (this.$route.query.id) {
+        fetch("http://localhost:8080/api/MaxPort/article/updateArticle", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id:this.$route.query.id,
+            title: this.title,
+            tag: this.class,
+            intro: this.intro,
+            body: this.$refs.writer.innerText,
+          }),
+        })
+          .then((res) => {res.json();console.log(res)})
+          .then((res) => {
+            this.isPublish = false;
+            this.$router.replace({
+              path: `/pubdone?id=${this.$route.query.id}&title=${this.title}`,
+            });
+            this.$router.go(0);
+          });
+        
+
+
+      } else {
+        fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: this.title,
+            tag: this.class,
+            intro: this.intro,
+            body: this.$refs.writer.innerText,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            this.isPublish = false;
+            this.$router.replace({
+              path: `/pubdone?id=${res.id}&title=${this.title}`,
+            });
+            this.$router.go(0);
+          });
+      }
     },
   },
   computed: {
@@ -129,21 +184,34 @@ export default {
   mounted() {
     this.$refs.writer.focus();
     this.$refs.writer.addEventListener("input", this.asinput());
+    if (this.$route.query.id) {
+      fetch(
+        `http://43.156.106.129/api/MaxPort/article/queryDetailArticle?articleId=${this.$route.query.id}`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          this.$refs.writer.innerText = res.body;
+          this.asinput()();
+          this.title = res.title;
+          this.intro = res.intro;
+          this.class = res.tag;
+        });
+    }
   },
 };
 </script>
 
 <style scoped>
-.class-heightlight{
+.class-heightlight {
   color: #1d7dfa !important;
   background-color: #e8f3ff !important;
 }
-.detail-footer{
+.detail-footer {
   position: relative;
   width: 100%;
   height: 59px;
 }
-.confirmBut{
+.confirmBut {
   position: absolute;
   top: 17px;
   left: 420px;
@@ -157,7 +225,7 @@ export default {
   color: rgb(255, 255, 255);
   cursor: pointer;
 }
-.cancelBut{
+.cancelBut {
   position: absolute;
   width: 80px;
   top: 17px;
@@ -171,7 +239,7 @@ export default {
   border-radius: 5px;
   cursor: pointer;
 }
-.textarea{
+.textarea {
   box-sizing: border-box;
   padding: 10px;
   width: 100%;
@@ -180,20 +248,20 @@ export default {
   border: 1px solid rgb(230, 230, 230);
   background-color: rgb(248, 248, 248);
 }
-.body-textarea::before{
-  content: '篇记摘要:';
+.body-textarea::before {
+  content: "篇记摘要:";
   position: absolute;
   top: 0;
   left: -65px;
 }
-.body-textarea{
+.body-textarea {
   position: relative;
   margin-left: 80px;
   width: 400px;
-  
+
   height: 120px;
 }
-.body-classes li{
+.body-classes li {
   text-align: center;
   margin-left: 10px;
   white-space: nowrap;
@@ -204,7 +272,7 @@ export default {
   border-radius: 3px;
   color: #86909c;
 }
-.body-classes ul{
+.body-classes ul {
   display: flex;
   margin-left: 5px;
   width: 100%;
@@ -212,29 +280,29 @@ export default {
   flex-wrap: wrap;
   list-style: none;
 }
-.body-classes::before{
-  content:"* 分类:";
+.body-classes::before {
+  content: "* 分类:";
   position: absolute;
-  left:-35px ;
+  left: -35px;
   top: 7px;
 }
-.body-classes{
+.body-classes {
   position: relative;
   width: 400px;
-  margin-left:70px;
+  margin-left: 70px;
 }
-.deatil-body{
+.deatil-body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
   height: 480px;
   border-bottom: 1px solid rgb(216, 214, 214);
-  color:black;
+  color: black;
   text-align: start;
   font-size: 14px;
 }
-.deatil-header{
+.deatil-header {
   text-align: start;
   text-indent: 20px;
   line-height: 60px;
@@ -293,6 +361,15 @@ export default {
   height: 20px;
   background-color: rgb(255, 255, 255);
 }
+.edit-preview::-webkit-scrollbar {
+  width: 6px;
+}
+.edit-preview::-webkit-scrollbar-thumb {
+  height: auto;
+  width: 6px;
+  border-radius: 3px;
+  background-color: rgb(228, 230, 235);
+}
 .edit-preview {
   width: 50%;
   padding: 25px;
@@ -301,6 +378,15 @@ export default {
   border-bottom: 1px solid rgb(230, 223, 223);
   box-sizing: border-box;
   overflow-y: scroll;
+}
+.edit-write::-webkit-scrollbar {
+  width: 6px;
+}
+.edit-write::-webkit-scrollbar-thumb {
+  height: auto;
+  width: 6px;
+  border-radius: 3px;
+  background-color: rgb(228, 230, 235);
 }
 .edit-write {
   box-sizing: border-box;
@@ -480,6 +566,7 @@ export default {
 .edit-tolls {
   width: 100%;
   height: 32px;
+  z-index: 1000;
   border: 1px solid rgb(221, 221, 221);
 }
 @font-face {
