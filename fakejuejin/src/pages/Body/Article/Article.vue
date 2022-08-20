@@ -43,22 +43,6 @@ export default {
     },
     comfirmDelete(){
       const isConfirm=confirm('删除文章后不可恢复，确定删除吗？');
-      // if(isConfirm){
-      //   fetch('http://localhost:8080/api/MaxPort/article/addArticle',{
-      //     method:'POST',
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body:JSON.stringify({
-      //       title:"titile"
-      //       ,tag:"frontend"
-      //       ,intro:"intro"
-      //       ,body:"body"
-      //     })
-      //   }).then((res)=>{
-      //     console.log(res)
-      //   })
-      // }
       if(isConfirm){
         fetch('http://localhost:8080/api/MaxPort/article/deleteArticle',{
           method:'DELETE',
