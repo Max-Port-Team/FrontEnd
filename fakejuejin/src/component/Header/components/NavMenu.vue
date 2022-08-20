@@ -25,7 +25,7 @@
           fill="#86909C"
         ></path>
       </svg>
-      <span>写文章</span>
+      <span @click="goedit">写文章</span>
     </li>
     <li @click="toMainPage">
       <svg
@@ -76,6 +76,10 @@ export default {
     return {};
   },
   methods: {
+    goedit(){
+      let routeData = this.$router.resolve({name: "editer"});
+      window.open(routeData.href, '_blank');
+    },
     toMainPage() {
       this.$refs.ullist.hidden = true;
       this.$router.push("/user/" + window.localStorage.userId);
