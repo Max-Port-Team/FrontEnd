@@ -36,6 +36,7 @@
               maxlength="20"
               required
               v-model="userName"
+              ref='nicknameInput'
               @click="inputFocus"
               @blur="blur"
               @focus="focusAccount"
@@ -96,6 +97,7 @@
               @blur="blur"
               @focus="focusAccount"
               v-model="userName"
+              tabindex="1"
             />
           </div>
           <div class="input-tip-first">
@@ -108,7 +110,6 @@
               输入的账号长度超过20
             </div>
           </div>
-
           <div class="input-box">
             <input
               name="loginPassWord"
@@ -345,6 +346,7 @@ export default {
     },
   },
   mounted() {
+    this.$refs.nicknameInput.focus()
     document.querySelector("body").classList.add("stopscroll");
   },
   beforeDestroy() {

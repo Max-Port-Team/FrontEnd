@@ -2,11 +2,41 @@
   <div class="edier-container">
     <header class="edier-header">
       <div class="title-other">
-        <input type="text" placeholder="输入文章标题..." class="editer-title" />
+        <input
+          type="text"
+          placeholder="输入文章标题..."
+          class="editer-title"
+          v-model="title"
+        />
         <div class="editer-other">
           <div class="editer-tip">文章将自动保存到草稿箱</div>
           <div class="editer-draftbox">草稿箱</div>
-          <div class="editer-publish">发布</div>
+          <div class="editer-publish" @click="publish">
+            发布
+            <div class="publish-deatil">
+              <header class="deatil-header">发布文章</header>
+              <section class="deatil-body">
+                <div class="body-classes">
+                  <ul @click="chooseclass($event)">
+                    <li>后端</li>
+                    <li>前端</li>
+                    <li>Android</li>
+                    <li>iOS</li>
+                    <li>人工智能</li>
+                    <li>开发工具</li>
+                    <li>代码人生</li>
+                    <li>阅读</li>
+                  </ul>
+                </div>
+                <div class="body-textarea">
+                  <textarea class="textarea" cols="20" rows="5" v-model="intro"></textarea>
+                </div>
+                
+              </section>
+
+              <footer class="deatil-footer"></footer>
+            </div>
+          </div>
           <div>
             <i class="iconfont icon-zhuanhuan"></i>
           </div>
@@ -30,14 +60,21 @@
 
 <script>
 import { marked } from "marked";
-import '../assets/previewcss.css'
+import "../assets/previewcss.css";
 export default {
+  name: "Editer",
   data() {
     return {
-      mdstr: "",
+      title: "",
+      intro:"",
+      class:''
     };
   },
   methods: {
+    chooseclass(){
+      
+    }
+    ,
     antishake(fnc, dalay) {
       let timer = null;
       return () => {
@@ -48,9 +85,25 @@ export default {
     asinput() {
       return this.antishake(() => {
         this.$refs.preview.innerHTML = marked.parse(
-          this.$refs.writer.innerHTML
+          this.$refs.writer.innerText
         );
       }, 500);
+    },
+    publish() {
+      // fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     title: "titile",
+      //     tag: "frontend",
+      //     intro: "intro",
+      //     body: this.$refs.writer.innerText,
+      //   }),
+      // }).then((res) => {
+      //   console.log(res);
+      // });
     },
   },
   computed: {
@@ -66,6 +119,122 @@ export default {
 </script>
 
 <style scoped>
+.textarea{
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: 1px solid rgb(230, 230, 230);
+  background-color: rgb(248, 248, 248);
+}
+.body-textarea::before{
+  content: '篇记摘要:';
+  position: absolute;
+  top: 0;
+  left: -65px;
+}
+.body-textarea{
+  position: relative;
+  margin-left: 80px;
+  width: 400px;
+  
+  height: 120px;
+}
+.body-classes li{
+  text-align: center;
+  margin-left: 10px;
+  white-space: nowrap;
+  width: 88px;
+  height: 28px;
+  background-color: #f4f5f5;
+  margin-top: 10px;
+  border-radius: 3px;
+  color: #86909c;
+}
+.body-classes ul{
+  display: flex;
+  margin-left: 5px;
+  width: 100%;
+  height: 32px;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.body-classes::before{
+  content:"* 分类:";
+  position: absolute;
+  left:-35px ;
+  top: 7px;
+}
+.body-classes{
+  position: relative;
+  width: 400px;
+  margin-left:70px;
+}
+.deatil-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 480px;
+  border-bottom: 1px solid rgb(216, 214, 214);
+  color:black;
+  text-align: start;
+  font-size: 14px;
+}
+.deatil-header{
+  text-align: start;
+  text-indent: 20px;
+  line-height: 60px;
+  color: #000;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid rgb(216, 214, 214);
+}
+.publish-deatil::before {
+  background-color: rgb(255, 255, 255);
+  border-bottom-color: rgb(144, 144, 144);
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: rgb(221, 221, 221);
+  border-left-style: solid;
+  border-left-width: 0.8px;
+  border-right-color: rgb(144, 144, 144);
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: rgb(221, 221, 221);
+  border-top-style: solid;
+  border-top-width: 0.8px;
+  color: rgb(144, 144, 144);
+  content: "";
+  cursor: default;
+  font-size: 14.4px;
+  height: 12px;
+  line-height: 17.2833px;
+  margin-left: -6px;
+  position: absolute;
+  right: 60px;
+  text-rendering: optimizelegibility;
+  top: -7.2px;
+  transform: matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0);
+  white-space: nowrap;
+  width: 12px;
+}
+.publish-deatil {
+  position: absolute;
+  left: -430px;
+  top: 55px;
+  width: 520px;
+  height: 600px;
+  background-color: white;
+  border: 1px solid rgb(216, 214, 214);
+  z-index: 1000;
+}
 .edit-footer {
   bottom: 0;
   width: 100%;
@@ -138,6 +307,7 @@ export default {
   font-weight: 400;
 }
 .editer-publish {
+  position: relative;
   text-align: center;
   width: 52px;
   height: 32px;

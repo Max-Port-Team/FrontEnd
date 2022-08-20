@@ -1,5 +1,5 @@
 <template>
-  <div class="HeaderContainer" @mousedown="prevent($event)" ref="HeaderContainer">
+  <div class="HeaderContainer" ref="HeaderContainer">
     <Nav />
     <!-- <hr v-if="Show()" /> -->
     <NavDetail v-if="Show()" />
@@ -11,9 +11,6 @@ import Nav from "./components/Nav.vue";
 import NavDetail from "./components/NavDetail.vue";
 export default {
   methods: {
-    prevent(e) {
-      e.preventDefault();
-    },
     Show() {
       if (
         this.$route.path == "/" ||

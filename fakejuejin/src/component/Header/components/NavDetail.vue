@@ -1,5 +1,5 @@
 <template>
-    <div id="root">
+    <div id="root" @mousedown="prevent($event)">
         <div class="linklist">
             <router-link to="/" exact-active-class="active">综合</router-link>
             <!-- <router-link to="/" exact-active-class="active">关注</router-link> -->
@@ -19,6 +19,11 @@
 <script>
 export default {
     name:"NavDetail",
+    methods:{
+        prevent(e) {
+            e.preventDefault();
+    },
+    }
 }
 </script>
 
