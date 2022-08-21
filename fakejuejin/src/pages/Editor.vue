@@ -1,23 +1,23 @@
 <template>
-  <div class="edier-container" v-if="isPublish">
-    <header class="edier-header">
+  <div class="editor-container" v-if="isPublish">
+    <header class="editor-header">
       <div class="title-other">
         <input
           type="text"
           placeholder="输入文章标题..."
-          class="editer-title"
+          class="editor-title"
           v-model="title"
         />
-        <div class="editer-other">
-          <div class="editer-tip">文章将自动保存到草稿箱</div>
-          <div class="editer-draftbox">草稿箱</div>
-          <div class="editer-publish" @click="showDeatilDody($event)">
+        <div class="editor-other">
+          <div class="editor-tip">文章将自动保存到草稿箱</div>
+          <div class="editor-draft-box">草稿箱</div>
+          <div class="editor-publish" @click="showDetailBody($event)">
             发布
-            <div class="publish-deatil" v-if="isshow">
-              <header class="deatil-header">发布文章</header>
-              <section class="deatil-body">
+            <div class="publish-detail" v-if="isShow">
+              <header class="detail-header">发布文章</header>
+              <section class="detail-body">
                 <div class="body-classes">
-                  <ul @click="chooseclass($event)">
+                  <ul @click="chooseClass($event)">
                     <li
                       v-for="(name, key) in classList"
                       :key="key"
@@ -37,7 +37,7 @@
                 </div>
               </section>
               <footer class="detail-footer">
-                <button class="cancelBut" @click="isshow = !isshow">
+                <button class="cancelBut" @click="isShow = !isShow">
                   取消
                 </button>
                 <button class="confirmBut" @click="publish">确定并发布</button>
@@ -47,12 +47,12 @@
           <div>
             <i class="iconfont icon-zhuanhuan"></i>
           </div>
-          <img :src="src" class="editer-avatar" />
+          <img :src="src" class="editor-avatar" />
         </div>
       </div>
       <div class="edit-tolls"></div>
     </header>
-    <main class="editer-main">
+    <main class="editor-main">
       <div
         class="edit-write"
         contenteditable="true"
@@ -69,14 +69,14 @@
 import { marked } from "marked";
 import "../assets/previewcss.css";
 export default {
-  name: "Editer",
+  name: "Editor",
   data() {
     return {
       src: localStorage.getItem("avatar"),
       title: "",
       intro: "",
       class: "",
-      isshow: false,
+      isShow: false,
       isPublish: true,
       classList: [
         "后端",
@@ -91,9 +91,9 @@ export default {
     };
   },
   methods: {
-    showDeatilDody(e) {
-      if (e.target.className == "editer-publish") {
-        this.isshow = !this.isshow;
+    showDetailBody(e) {
+      if (e.target.className == "editor-publish") {
+        this.isShow = !this.isShow;
         this.$nextTick(() => {
           this.$refs.classes.forEach((element) => {
             if (element.innerText == this.class) {
@@ -103,7 +103,7 @@ export default {
         });
       }
     },
-    chooseclass(e) {
+    chooseClass(e) {
       if (e.target.tagName == "LI") {
         this.$refs.classes.forEach((element) => {
           element.classList.remove("class-heightlight");
@@ -134,14 +134,17 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id:this.$route.query.id,
+            id: this.$route.query.id,
             title: this.title,
             tag: this.class,
             intro: this.intro,
             body: this.$refs.writer.innerText,
           }),
         })
-          .then((res) => {res.json();console.log(res)})
+          .then((res) => {
+            res.json();
+            console.log(res);
+          })
           .then((res) => {
             this.isPublish = false;
             this.$router.replace({
@@ -149,9 +152,6 @@ export default {
             });
             this.$router.go(0);
           });
-        
-
-
       } else {
         fetch("http://localhost:8080/api/MaxPort/article/addArticle", {
           method: "POST",
@@ -291,7 +291,7 @@ export default {
   width: 400px;
   margin-left: 70px;
 }
-.deatil-body {
+.detail-body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -302,7 +302,7 @@ export default {
   text-align: start;
   font-size: 14px;
 }
-.deatil-header {
+.detail-header {
   text-align: start;
   text-indent: 20px;
   line-height: 60px;
@@ -311,7 +311,7 @@ export default {
   height: 60px;
   border-bottom: 1px solid rgb(216, 214, 214);
 }
-.publish-deatil::before {
+.publish-detail::before {
   background-color: rgb(255, 255, 255);
   border-bottom-color: rgb(144, 144, 144);
   border-bottom-style: none;
@@ -345,7 +345,7 @@ export default {
   white-space: nowrap;
   width: 12px;
 }
-.publish-deatil {
+.publish-detail {
   position: absolute;
   left: -430px;
   top: 55px;
@@ -418,7 +418,7 @@ export default {
   text-rendering: optimizelegibility;
   word-break: break-word;
 }
-.editer-main {
+.editor-main {
   position: relative;
   display: flex;
   box-sizing: border-box;
@@ -444,7 +444,7 @@ export default {
   font-variation-settings: normal;
   font-weight: 400;
 }
-.editer-publish {
+.editor-publish {
   position: relative;
   text-align: center;
   width: 52px;
@@ -456,7 +456,7 @@ export default {
   font-weight: 400;
   cursor: pointer;
 }
-.editer-draftbox {
+.editor-draft-box {
   appearance: button;
   background-color: rgb(255, 255, 255);
   border-bottom-color: rgb(29, 125, 250);
@@ -516,25 +516,25 @@ export default {
   text-rendering: optimizelegibility;
   text-transform: none;
 }
-.editer-tip {
+.editor-tip {
   font-size: 14px;
   white-space: nowrap;
   color: #c9cdd4;
   cursor: default;
 }
-.editer-avatar {
+.editor-avatar {
   height: 32px;
   width: 32px;
   border-radius: 50%;
 }
-.editer-other {
+.editor-other {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 40px;
   width: 650px;
 }
-.editer-title {
+.editor-title {
   margin: 0;
   padding: 0;
   font-size: 24px;
@@ -545,13 +545,13 @@ export default {
   height: 100%;
   width: 100%;
 }
-.edier-container {
+.editor-container {
   width: 100%;
   height: 100%;
   overflow: hidden;
   background-color: rgb(255, 255, 255);
 }
-.edier-header {
+.editor-header {
   width: 100%;
   height: 100px;
   background-color: white;

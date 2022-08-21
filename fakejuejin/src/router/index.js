@@ -8,7 +8,7 @@ import UserBody from '../pages/User/pages/UserBody.vue'
 import UserSideBar from '../pages/User/components/UserSidebar.vue'
 import UserProfile from '../pages/User/components/UserProfile.vue'
 import LogIn from "../component/LogIn.vue";
-import Editer from "../pages/Editer.vue"
+import Editor from "../pages/Editor.vue"
 import Pubdone from '../pages/Pubdone.vue'
 export default new VueRouter({
 	routes: [
@@ -33,11 +33,11 @@ export default new VueRouter({
 				SideBar: ArticleSideBar,
 			},
 		},
-    {
-      name: "profile",
-      path: "/user/profile",
-      components: {default:UserProfile }
-    },
+		{
+			name: "profile",
+			path: "/user/profile",
+			components: { default: UserProfile }
+		},
 		{
 			name: "user",
 			path: "/user/:userId",
@@ -62,14 +62,14 @@ export default new VueRouter({
 			component: LogIn,
 		},
 		{
-			name: "editer",
-			path: "/editer",
-			component: Editer,
+			name: "editor",
+			path: "/editor",
+			component: Editor,
 		},
 		{
-			path:"/pubdone",
-			component:Pubdone
+			path: "/pubdone",
+			component: Pubdone
 		}
 	],
-  mode:'history'
+	mode: 'history'
 });

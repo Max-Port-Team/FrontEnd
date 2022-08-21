@@ -20,11 +20,11 @@ export default {
     },
   },
   components: { Nav, NavDetail },
-  mounted(){
-    if(this.$route.path=='/editer'){
-      this.$refs.HeaderContainer.hidden=true
+  mounted() {
+    if (this.$route.path == "/editor") {
+      this.$refs.HeaderContainer.hidden = true;
     }
-  }
+  },
 };
 </script>
 
