@@ -41,7 +41,12 @@ export default {
         clearInterval(timer);
         let html = marked.parse(this.body);
         this.$refs.ArticleBody.innerHTML = html.replace(/复制代码/g,"");
-        document.querySelectorAll('h1').forEach(v=>{v.style.marginBottom='40px';v.style.marginTop='40px'})
+        document.querySelectorAll('h1').forEach(v => { v.style.marginBottom = '40px'; v.style.marginTop = '40px'; v.style.color = '#007fff'; let hr = document.createElement('hr');hr.style='border: 0;margin-top:25px;padding-top: 1.5px;background: linear-gradient(to right, transparent, #d0d0d5, transparent);'; v.appendChild(hr)})
+        document.querySelectorAll('h2').forEach(v => { v.style.marginBottom = '20px'; v.style.marginTop = '20px'; v.style.color = '#007fff'; let hr = document.createElement('hr');hr.style='border: 0;margin-top:15px;padding-top: 1.5px;background: linear-gradient(to right, transparent, #d0d0d5, transparent);'; v.appendChild(hr)})
+        document.querySelectorAll('h3').forEach(v => { v.style.marginBottom = '10px'; v.style.marginTop = '10px'; v.style.color='#007fff'})
+        document.querySelectorAll('h4').forEach(v => { v.style.color='#002fff'})
+        document.querySelectorAll('h5').forEach(v => { v.style.color='#002fff'})
+        document.querySelectorAll('h6').forEach(v => { v.style.color='#002fff'})
         document.querySelectorAll("pre").forEach((v) => (v.className = "language-javascript"));
         new Promise((resolve,reject)=>{
           this.loadScript("./index.js",resolve)
